@@ -1,0 +1,233 @@
+\chapter{Mesure d'une température}
+%%%%%%%%%%%%%%%%%%%%%%%%% themocouple capteur actif !!!! car FEM
+%%%%%%%%%%%%%%%% http://www.si.ens-cachan.fr/ressource/r7/r7.htm   http://www.fgpsensors.com/WCT_SIMPLEFAQ/client_fr.dim?l=fr  http://www.si.ens-cachan.fr/ressource/r7/r7_metrologie.htm#m6 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%ù utiliser le package ifsym pour les \Thermo{0to6) p59
+\section{Choix d'un capteur}
+\parpic{\includegraphics[width=10mm]{./img/galilee}}Depuis l'époque de Galilée et le premier thermomètre (basé sur la dilatation de certains liquides) en 1593, il y a eu d'énormes progrès dans ce domaine. Les capteurs analogiques sont apparus pour remédier à un problème : \og Comment interfacer un thermomètre à mercure sur un système automatisé ?\fg\newline 
+
+Cette mesure étant toujours complexe à mettre en oeuvre, il existe plusieurs solutions. La démarche habituelle est d'utiliser un capteur passif basé sur la variation d'une grandeur électrique en fonction du mesurande, la température dans notre cas. La précision et la justesse des mesures sont directement liées au circuit conditionneur associé à de tels capteurs.
+
+Pour une plus grande simplicité de mise en oeuvre il est possible de s'orienter sur les capteurs actifs, permettant de mesurer une quantité électronique.
+
+\subsection{Capteurs actifs}
+Souvant sous la forme de circuits intégrés, ils sont appréciés pour leur simplicité de mise en oeuvre et leur faible coût. Ils peuvent dialoguer par liaison série, sur le BUS I2C et bien d'autres protocoles encore.\newline
+
+Parmi les plus utilisés il y a le DS1620 de chez MAXIM qui transmet par liaison série la température sur 9 bits. Sa résolution est de 0,5~\degres C. Les plages de mesures sont de l'ordre de -10~\degres C à +80~\degres C. Il existe beaucoup d'équivalents, par exemple le DS1820.
+
+Il y a également le SMT160-30 de chez SMARTEC qui module le rapport cyclique du signal en sortie selon la température. Il s'agit de PWM (Modulation à Largeur d'Impulsion). Il a une précision absolue de 0,7~\degres C dans l'intervalle -30~\degres C à +100~\degres C. La sortie du capteur, de technologie CMOS, peut être déportée par un câble jusqu'à 20 mètres.
+
+Pour interfacer sur le BUS I2C il y a notamment la sonde DS75 ou DS1621 de chez DALLAS. Le DS75 sur 12 bits permet une résolution de 0,0625~\degres C pour une précision de $\pm$~2,0~\degres C. Le DS1621 a une résolution de 0,5~\degres C. 
+Il en existe également pour une liaison SPI (Serial Peripheral Interface) comme le DS1722 de chez MAXIM, il a les mêmes caractéristiques que le DS75.\newline
+
+Il existe aussi des capteurs intégrés du type LM35 ou LM335 de chez NATIONAL SEMICONDUCTOR. Ce type de capteur délivre un signal qualibré en milivolts par degré. Avec un LM35 on ne peut espérer atteindre une précision supérieure à 0.25~\degres C. Sa sortie est linéaire dans la plage -40~\degres C à +110~\degres C et vaut 10.0~mV/\degres C. Pour la fidélité, la moyenne des mesures donne 0.5~\degres C \og garanti\fg.\newline
+
+Les thermocouples font également parti des capteurs actifs. En effet, le principe de mesure est basé sur l'effet Seebeck. Deux fils métalliques de natures différentes sont reliés par deux jonctions. L'effet Seebeck crée une Force \' Electromotrice liée à la différence de température entre ces deux jonctions. 
+
+Les thermocouples sont des sondes pouvant mesurer des températures allant de -270 \degres C à +2320 \degres C.
+
+Leur coût est assez faible sauf pour les températures extrêmes.
+
+Il existe plusieurs types de thermocouples. Ceux à base de métaux usuels, de métaux nobles ou de métaux réfractaires. Il faut les choisir en fonction des gammes de températures ainsi que de leur coefficient de Seebeck. Ce coefficient est directement lié à la sensibilité de la sonde. \newline 
+
+De nos jours il n'en existe pas de plus juste. Que ce soit pour la précision, la fidélité ou même de plus grandes plages de mesures, rien n'égale les sondes analogiques.
+
+\subsection{Capteurs passifs}
+Il existe deux principaux types de sondes passives. Les thermistances et les résistances métalliques.
+
+Lorsque le faible coût est privilégié par rapport à la précision, il est préférable d'utiliser les thermistances.
+
+\subsubsection{thermistances}
+Les thermistances sont constituées à partir d'oxydes métalliques semi-conducteurs polycristallins (Mg0, MgAl204,  Mn203, Fe304, Ni0 etc.) Ce sont des résistances dont la valeur varie en fonction de la température. 
+
+Il en existe deux types~: les thermistances à Coefficient de Température Négatif (CTN), ou celles moins courantes, à  Coefficient de Température Positif (CTP). \newline
+
+Les thermistances ont une très grande sensibilité thermique, ce qui rend leur utilisation très aisée. Un simple étage d'amplification permet une mesure à 0,5 \degres C près, celle-ci pouvant être améliorée avec un amplificateur d'instrumentation. 
+
+
+Un autre intérêt est que leur valeur ohmique est élevée (supérieur à 1000~$\Omega$) ce qui rend négligeable les fils de liaisons de la sonde. Les points faibles des thermistances sont la dérive de leurs caractéristiques au cours du temps et d'une interchangeabilité médiocre.\newline
+
+
+Lorsqu'il est nécessaire d'effectuer des mesures sur une grande plage de températures, ou lorsqu'il faut une plus grande précision, il est préférable d'utiliser les résistances métalliques (ou RTD).
+%%
+\subsubsection{RTDs et pRTD}
+Les resitances métalliques (ou Resistance Temperature Detector pour RTD) sont composées d'un fil métallique cylindrique dont la valeur ohmique est relation de la température. Il s'agit de sondes thermorésistives.\newline
+
+Pour une plus grande sensibilité il faut choisir un métal à Coefficient de Température (CTR) élevé. Pour une meilleure fidélité, le métal doit être exempt de tout défaut structural et doit présenter une grande résistance à la corrosion et à la pollution. La linéarité est également un point important mais en conflit avec la fidélité. En effet, pour obtenir un métal linéaire il est possible d'associer plusieurs métaux à CTR différents. Le métal doit être très ductile pour permettre un encombrement réduit.
+
+Le platine est la matière la plus adaptée à ce type de sonde. Il peut s'obtenir très pur (\nombre{99,999}~\%). De plus, il s'agit d'un matériau très ductile. Les RTDs de platine se nomment Platine Resistance Temperature Detectors (pRTDs).\newline
+
+Ces sondes bénéficient d'une grande plage de mesure. Il s'en distingue plusieurs types. Les Pt100, Pt500, Pt1000 etc.
+
+Leur nom est directement lié à leur valeur ohmique à 0~\degres C. La Pt100 à une valeur de 100,00~$\Omega$ à  0,00~\degres C et de 138,51~$\Omega$ à 100,00~\degres C~; la Pt1000 1000,00 $\Omega$ à  0,00~\degres C, \dots\newline
+
+A noter que, citation de Wikipedia (\url{http://fr.wikipedia.org/}), \og la sonde à résistance de platine définie par l'EIT-90 est la plus élaborée et permet des mesures de température de très hautes exactitudes (voir "supplementary informations for the realization of the ITS-90", édité par le BIPM, Pavillon de Sèvre en 1990) [...] Un tel instrument permet, en montage 4 fils et relié à un pont de résistances de type Guidline ou ASL F900, de détecter des variations de températures de l'ordre de 0,1~mili-Kelvin et de réduire les incertitudes en le mettant en oeuvre dans des cellules points fixes de qualité métrologique à un ordre de grandeur infime \fg. Pour ce faire il faut utiliser une Pt25.\newline
+
+On remarque que les meilleures précisions sont atteintes avec les PRTDs. La sonde Pt100 est la plus utilisée puiqu'elle à la courbe la plus linéaire, de plus elle est normalisée. Il s'agit de la norme DIN 43760 (IEC 751) (conférer à l' annexe~\ref{tablePt100} page~\pageref{tablePt100} des annexes). Ce qui rend cette sonde facilement interchangeable. Contrairement aux termistances, elle n'a pas besoin d'être qualibrée. 
+
+Avec les Pt100, il est possible d'atteindre une précision de 0,1~\degres C (voir supérieure par spéculation et une bonne linéarisation). \newline
+
+Il existe plusieurs classes de Pt100. La classe A est la plus précise, alors que la classe B est la moins coûteuse. Son temps de réponse est 0,1~seconde. Sa sensibilité statique vaut $\frac{\Delta R}{\Delta\tccentigrade}$, soit $S=\frac{390,48-18,52}{1050}=0,354~\Omega/\tccentigrade$.
+
+Elles sont disponibles en trois versions différentes. La version deux fils est la plus répandue, mais il est nécessaire de passer à la version trois (voir quatre) fils pour annuler l'effet résistif des fils de connexion.\newline
+
+
+Pour exploiter cette sonde il faut utiliser un circuit conditionneur. Il peut être réalisé par un circuit intégré, ou plusieurs. Tout dépend du signal voulu en sortie, de l'alimentation disponible, ou de la précision désirée. 
+
+
+
+%%%
+\section{Pt100 : Circuit conditionneur}
+Pour exploiter une sonde Pt100 il existe de nombreuses possibilités. \textbf{Dans tout les cas, ne pas la faire parcourir par un courant supérieur à 3~mA pour éviter l'auto-échauffement produit par l'effet Joule}. Le constructeur préconise un courant de 1~mA.
+
+\subsection{Les circuits intégrés}
+Avant tout vérifier la disponibilité des produits qui vous paraissent idéaux. Je suis parti sur un \textbf{ADT70}, il semblait idéal pour mon utilisation~: mais après la réalisation du schéma il a fallu passer la commande. Et là, grosse déception. Il était indisponible. Une vérification rapide sur \url{http://www.analog.com/} m'a éclairci : \textcolor{cyan}{This product is currently being phased out of production. Not recommended for new designs.} Ce qui en français correspond à \og Production arrêtée \fg . 
+
+Ils nous précisent que pour trouver un produit équivalent il faut regarder dans un certain tableau. Personnellement, je n'en ai pas trouvé.\newline
+
+Néanmoins, en regardant la structure interne de l'ADT70 on peut se faire une idée d'un premier circuit conditionneur (voir ci-après figure~\ref{ADT70} page \pageref{ADT70}). Il est composé d'une source de courant 1~mA basée sur une référence de tension 2,5~V. D'un amplificateur d'instrumentation et d'un autre amplificateur pouvant être branché en comparateur pour détecter un certain seuil de température par exemple.\newline
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=9cm]{./img/ADT70}
+	\caption{Structure interne de l'ADT70} 
+	\label{ADT70}
+\end{figure}
+
+
+Le XTR103 convertit la variation de résistance en variation de courant. Sa sortie est analogique et comprise entre 4~mA et 20~mA. Son alimentation est unipolaire.~Avec l'alimentation positive comprise en 9~V et 40~V.
+
+Ce circuit peut être suivi du RCV420, pour convertir la variation de courant (4 -- 20~mA) en variation de tension (0 -- 5~V).\newline
+
+L' Interface Transducteur Universelle (ITU) ou \og Universal Transducer Interface\fg\ (UTI) est un convertisseur de signal du capteur en signal horaire, basé sur un oscillateur période-modulée. La sortie est sur 13 bits. il s'agit de Modulation de Largeur d'Impulsion (MLI, ou PWM en anglais pour "~Pulse Width Modulation~"). Site internet~: \url{http://www.smartec.fr/fr/uti-FR.php}. Il a une alimentation unipolaire, mais sa précision est légèrement plus faible.\newline
+
+Le LTC2433 est un cicuits dialoguant par bus SPI (pour Serial Peripheral Interface). Il a une résolution de 16~bits et une alimentation unipolaire.\newline
+
+Tous ces circuits ont également l'avantage d'être compensés. Le constructeur nous donne la fiabilités des mesures et leurs précisions. De plus, hormis la sonde (2, 3, ou 4 fils), ils n'ont en général besoin que d'une résistance pour le gain de l'amplificateur. 
+
+
+\subsection{Un circuit adapté}
+Lorsque l'on a des contraintes extérieures (alimentation, températures,~\dots) il est plus difficile de trouver un circuit intégré nous convenant. Puisque je suis limité en consommation et en alimentation, j'ai trouvé préférable de produire mon circuit conditionneur.\newline
+
+Pour éviter l'auto-échauffement de la sonde et simplifier les calculs par la suite, j'ai décidé de contrôler ma sonde en courant. L'utilisation d'un pont de Wheatstone s'est avéré nécessaire pour obtenir une meilleure précision de mesure. Pour amplifier le signal généré par le pont de Wheatstone (quelques mV/\degres C) il faut utiliser un amplificateur d'instrumentation. 
+
+Le principe général est de recréer l'ADT70 (conférer figure~\ref{ADT70} page \pageref{ADT70}).
+
+Pour la source de courant, plusieurs possibilités.
+
+\subsubsection{Source de courant stable}
+\parpic{\includegraphics[width=15mm]{./img/Fet}}Pour réaliser une source de courant il y a la solution du transistor à effet de champ (JFET par exemple). Il faut relier la grille à la source. Pour le courant débité, il s'agit de $I_{DSS}$ (en général de 0,2 à 5~mA).On en trouve sous forme de diodes. Ce sont tout simplement des diodes à courant constant.\newline
+
+\parpic[r]{\includegraphics[width=30mm]{./img/PNP}}Il est aussi possible d'en réaliser avec une diode zener associée à un transistor, mais cela introduit de nombreux composants. Tous susceptibles d'être affectés par la température. Sur ce schéma on trouve $Ic=\frac {U_{z} - 0,6}{R}$.\newline
+
+Je me suis rabattu sur la solution des amplificateurs opérationnels pour maîtriser les composantes de défaut (offset, dérive, thermique, etc.) et l'alimentation. Voir figure \ref{aop} page \pageref{aop}.
+
+Le schéma de principe est simple, il faut partir d'une source de tension stable (appellé référence de tension, d'où $V_{ref}$). Pour mon application la source de tension correspondant le mieux à mon utilisation est le MCP1525 de Microchip. Il s'agit d'une référence de tension 2,5~V. Faible bruit, faible dérive thermique ($\pm$~50~ppm/\degres C). Le MCP1525 est idéal pour les température supérieures à 25~\degres C~: sa sortie est de 2,500~V à 25,00~\degres C et plus, pour 2,498 à 0,00~\degres C. Sa qualité se dégrade avec les températures négatives.\newline
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=8cm]{./img/aop}
+	\caption{Source de courant stable}
+	\label{aop}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% http://perso.orange.fr/michel.hubin/physique/elec/chap_aop2.htm
+
+Soit $I_{ref}$ le courant dans $R_2$, on obtient $I_{ref}=\frac {V_{ref}}{R_1}$. Puisque ma charge est composée d'un pont de Wheatstone (conférer figure page \ref{wheatstone} page \pageref{pont}), en $R_2$, il faut $I_{ref}=2~mA$. De cette manière la sonde sera parcourue par un courant de 1~mA.
+
+Il faut bien entendu choisir $R_1$ et $R_2$ avec un très faible coefficient de température. C'est pourquoi j'ai choisi la résistance en premier pour ensuite calculer le courant $I_{ref}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%Ajouter la déf de la résistance !!!!%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Pour choisir un amplificateur opérationnel convenable il faut faire attention à l'offset d'entrée et également à la dérive thermique. L'alimentation n'est pas non plus un point négligeable.
+
+Il m'a paru bon de prendre l'OPA335. Il a un offset de $5~\mu V$ (max), une dérive de $0,05~\mu V/\tccentigrade $. Une faible consommation et une alimentation unipolaire.\newline
+
+La charge $R_2$ est donc composée d'un pont de Wheatstone pour plus de précision. 
+
+\subsubsection{Pont de Wheatstone}\label{pont}
+Ce circuit permet de déterminer la résistance électrique d'un élément situé dans une branche du pont. Voir figure \ref{wheatstone} pour la représentation schématique du pont. 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=10cm]{./img/pont}
+	\caption{Pont de Wheatstone}
+	\label{wheatstone}
+\end{figure}
+
+$V_0$ est la tension à mesurer. Elle se nomme tension de déséquilibre. En effet, lorsque le pont est à l'équilibre $V_0$ est nulle. Pour une mesure commençant à 0~\degres C il est judicieux de placer le pont à l'équilibre pour $T=0$~\degres C. Il faut donc choisir les résistances composant le pont à $100~\Omega$ pour la Pt100. Il faut bien entendu choisir des résistances de précision à faible coefficient de température. 
+
+Pour cela j'ai choisi des résistances de précision à couche métallique. Le constructeur les certifie à 0,05~\% et le vendeur à 0,1~\%. Elles sont à bruit et coefficient de température négligeables (d'après le constructeur).\newline
+
+De par sa nature, le pont de Wheatstone introduit une erreur de linéarité dépendant du nombre d'éléments variants. Se référer à la figure \ref{wheatstone} pour comparer. Pour éviter cette erreur en plus, il faut utiliser deux éléments variants. Lorsque le pont est contrôlé en tension, l'erreur de linéarité est de 0,5~\% pour un élément variant. Encore une raison de préférer la source de courant. De plus les sondes Pt100 étant normalisées, elles varieront de paire.\newline
+
+Par calcul on retrouve rapidement la valeur de $V_0$~:
+En partant du schéma à deux éléments variant, on a $R_{Pt100}=R+\delta R$ avec $R$ la valeur de la Pt100 à 0,00~\degres C, soit $R=100,00~\Omega$.
+
+Les deux branches ayant la même résistance équivalente, le courant traversant les deux sondes sera le même. Soit $I$ le courant fourni par la source de courant et $I'$ le courant traversant une sonde.
+
+On a $V_0=I'(R+ \delta R)-I'\times R $, or  $I'=\frac {I}{2}$. Finalement on trouve, \fbox{$V_0=\frac {I}{2}\times \delta R$}\label{V0}.\newline
+
+L'équilibre du pont ne variant que de 0,4~mV/\degres C environ, il est nécessaire d'amplifier le signal.
+
+
+\subsubsection{Amplificateur}
+Pour éviter tout défaut supplémentaire il faut se servir d'un amplificateur d'instrumentation. Il est possible d'en réaliser avec trois amplificateurs opérationnels mais cela ne convient pas pour une faible consommation et cela ajoute des perturbations. 
+
+La solution est donc l'amplificateur d'instrumentation intégré, avec une alimentation unipolaire. Ils ont en général un très faible offset d'entrée et un faible coefficient de température. Il en existe beaucoup, ceux que j'ai retenu sont le INA122 et le INA118. Le INA118 est le plus approprié. Avec un offset d'entrée de 50~$\mu$V pour une variation de 0,5~$\mu$V/\degres C.\newline
+
+Son gain étant réglable par une résistance $R_G$ il faut l'optimiser pour l'entrée analogique 10~bits du PIC18F. La sortie doit donc être comprise entre 0 et 5~V.\newline
+
+Soit $G$ le gain, le constructeur nous donne la formule suivante~: $G=1+\frac{50\cdot 10^3}{R_G}$ 
+
+Soit $V_s$ la tension de tortie de l'amplificateur, 5~V pour un maximum de 30~\degres C (soit $\delta R=11,67~\Omega $ d'après l'annexe \ref{tablePt100} on obtient un gain $G=334,33$ (conférer Annexe \ref{Incertitude}. Toujours en annexe, $R_g=150~\Omega$.\newline
+
+On obtient donc en entrée du PIC $V_s=334,33\times\frac{I}{2}\times \delta R$,
+soit environ 0,166~V/\degres C.
+Pour calculer la précision des mesures, se référer à l'annexe \ref{Incertitude} (page \pageref{Incertitude} des annexes).
+
+
+\subsubsection{Interface CAN : exploitation de la sonde}
+Pour exploiter la tension analogique en sortie de l'amplificateur d'instrumentation, j'ai choisi d'utiliser le Convertisseur Analogique/Numérique (ou ADC) du PIC. Sa résolution est de 10~bits.\newline
+
+Des calculs effectués en annexe \ref{Incertitude}, on retiendra les relations $\eqref{rslt}$ et$\eqref{rslt2}$ , soit à entrer dans le calculateur~:
+
+\begin{eqnarray} 
+	T & = & \left (T_0+\frac{\sqrt{A^2+4B\cdot r}-A}{2B}\pm 0,07\right ) \tccentigrade \label{rslt}\\
+	r & = & \frac{2V_s}{G\cdot I\cdot R}\pm 0,0124 \label{rslt2}\\
+	A & = & 3,9083\cdot 10^{-3}~K^{-1} \\
+	B & = & -5,775\cdot 10^{-7}~K^{-2}\\
+	T_0 & = & 0,00~\tccentigrade\\
+& & \\		
+	G & = & 425,53\pm 0,4255 \\
+	I & = & (2,499\pm 0,004)~mA \\
+	R & = & (100\pm 0,1)~\Omega 
+\end{eqnarray}
+
+La variable étant $V_s$.
+
+On obtient une mesure fidèle à 0,1~\degres C (théoriquement), ce qui correspond au cahier des charges. Il ne manque plus qu'à pouvoir comparer avec un matériel plus performant.\newline
+
+Le code suivant permet de récupérer la valeur analogique $V_s$ sur AN0 du PIC et de la retourner en valeur numérique.
+
+
+
+\lstset{framexleftmargin=5mm}
+\begin{lstlisting}[numbers=left]
+unsigned char getTemp()
+{
+    // Début de conversion
+         ADCON0bits.GO = 1;
+
+    // On attend la fin de la conversion
+         while (ADCON0bits.GO);
+
+    //On retourne les bits de données
+         return ADRESH;
+}
+\end{lstlisting}
+
+\subsubsection{Plus grande plage de température}
+Le défaut de linéarité de la sonde se fait sentir pour les températures négatives. Il faut compenser l'ajustement polynomial quadratique standard. 
+
+Pour cela se référer au document \textit{Mesure de température par thermistance Pt100 / Pt1000} de Thomas Meader.
+
+Ce dossier est disponible à cette adresse~: \url{http://lpm.epfl.ch/webdav/site/lpm/shared/enseignement/divers/060914\%20Mesure\%20de\%20température\%20Pt100-Pt1000.pdf}
+

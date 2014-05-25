@@ -1,0 +1,44 @@
+\thispagestyle{empty}
+
+\chapter{Cartes}
+
+\section{Emetteur}
+Vous trouverez page suivante le schéma de la carte émettrice. Celle qui mesure la température. Pour un soucis de consommation, plusieurs régulateurs avec "Enable" ont été utilisés pour pouvoir couper l'alimentation de tout ce qui est inutile à certain moment.
+
+Puis les pages suivantes sont directement tirée du fichier PostScript exporté par Pcb. Il s'agit des typons de la carte émettrice. 
+
+\section{Récepteur}
+Ensuite vous trouverez le schéma de la carte récepteur. Bien remarquer le condensateur de 470~nF. C'est par lui qu'est fixé le potentiel 3,3~V pour fixer la vitesse de transmission sur la liaison USB. 
+
+Puis les typons de la carte récepteur exportés par Pcb. 3 feuilles parmis 12 (masque, trou de perçage, \dots)
+
+\begin{landscape}
+%%\addcontentsline{toc}{chapter}{Schéma}
+\begin{figure}[h]
+    \includegraphics[]{./img/Emet}
+    \caption{Schema \' Emetteur}
+\end{figure}
+\end{landscape}
+
+\includepdf[pages={2,3,11},pagecommand={\thispagestyle{plain}}]{Emetteur} 
+
+
+
+\begin{landscape}
+\begin{figure}[]
+    \includegraphics[width=25cm]{./img/Recep}
+    \caption{Schema \' Emetteur}
+\end{figure}
+\end{landscape}
+\includepdf[pages={2,3,11},pagecommand={\thispagestyle{plain}}]{Recepteur} 
+
+
+%\includepdf[pages={{},1},nup=1x2,landscape=true]{output}
+%\includepdf[pages={{},2},nup=1x2,landscape=true,angle=180]{output}
+%\includepdf[pages={6,3},nup=1x2,landscape=true]{output}
+%\includepdf[pages={5,4},nup=1x2,landscape=true,angle=180]{output} 
+
+
+%\chapter{Organigramme}
+%\addcontentsline{toc}{chapter}{D~~Organigramme}
+%\includepdf[pages={1},nup=1x1,landscape=true]{AB_CO} %% nup pour l'echelle

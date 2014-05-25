@@ -1,0 +1,36 @@
+22/03/2013
+===================
+
+HowTo : 
+-Coller toutes les macros et tous les fichiers dans le dossier du fichier "Launcher.xlsm".
+-Ouvrir le fichier "Launcher.xlsm" 
+-Cliquez sur "Options..." (en haut)
+-"Activer ce contenu"
+-"Ok"
+-La macro se lance
+-Verifiez que les nom des fichiers que vous voulez editer sont les bons avec l'option "changer les noms"
+
+
+
+
+
+Decembre 2012
+===================
+
+HowTo : 
+-ouvrir l'extract
+-charger toutes les macros dans l'extract
+-lancer la macro nomme "Stat"
+-ouvrir le tableau de productivite des tech
+-selectionne la feuille resultat de la premiere macro
+-verifier que le nom du fichier contenant le tableau de productivite des tech est bien configure dans le code de la macro "ProductiviteDesTech" dans le "module1" (premiere ligne du Main)
+-lancer la macro nomme "ProductiviteDesTech"
+-ouvrir le tableau de bord
+-selectionne la feuille resultat de la premiere macro
+-verifier que le nom du fichier contenant le tableau de bord est bien configure dans le code de la macro "TableauBord" dans le "module3" (premiere ligne du Main)
+-lancer la macro nomme "TableauBord"
+
+
+Attention !
+
+Les macros doivent etre charges apres l'ouverture de l'extract.

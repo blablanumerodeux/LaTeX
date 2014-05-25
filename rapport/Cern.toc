@@ -1,0 +1,19 @@
+\select@language {french}
+\contentsline {section}{Introduction}{1}{section*.2}
+\contentsline {section}{\numberline {1}gEDA}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}installation}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}gschem}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Pcb}{6}{subsection.1.3}
+\contentsline {section}{\numberline {2}Programmation des PIC sous linux}{11}{section.2}
+\contentsline {subsection}{\numberline {2.1}installation}{11}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}utilisation}{11}{subsection.2.2}
+\contentsline {section}{\numberline {3}Acquisition d'une temp\'erature}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Principe de fonctionnement des cartes}{13}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Mesure d'une temp\'erature}{13}{subsubsection.3.1.1}
+\contentsline {subsection}{\numberline {3.2}Le module Xbee}{14}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Le programme}{14}{subsection.3.3}
+\contentsline {section}{Conclusion}{15}{section*.3}
+\contentsline {section}{\numberline {A}table Pt100}{16}{section.A}
+\contentsline {section}{\numberline {B}Cartes}{19}{section.B}
+\contentsline {subsection}{\numberline {B.1}Emetteur}{19}{subsection.B.1}
+\contentsline {subsection}{\numberline {B.2}R\'ecepteur}{19}{subsection.B.2}

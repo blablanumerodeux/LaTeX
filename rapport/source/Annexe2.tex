@@ -1,0 +1,226 @@
+\thispagestyle{empty}
+
+\chapter{Calcul d'incertitude} \label{Incertitude}
+%%%
+\normalsize
+Ici nous allons effectuer en détail les calculs d'incertitude pour estimer la précision de la chaîne de mesure.
+Ceci dans le but de connaître l'incertitudes des mesures de températures envoyées par le PIC. Les calculs seraient allégés en utilisant les dérivées logarithmiques, mais j'ai préféré n'utiliser qu'une seule méthode.
+
+
+\section{Données}
+Les documentations constructeurs nous donnent~:\newline
+$R_s=1~k\Omega\ à 0,1\%$;\newline
+$R=100~\Omega\ à 0,1\%$;\newline
+$R_{Pt100}=(R_0+\delta R)~\Omega\ $ à $0,01\%$. Pour la suite on choisira $R_0=R$ pour avoir $R_0$ à $0,1\%$ et $\delta R $ à $0,01\%$;\newline
+Pour une température supérieure à $\theta =0~\tccentigrade$, on à $2,498~V\leq V_{ref}\leq 2,500~V$. \newline
+L'OPA335 a++++ un offset d'entrée de $5~\mu V$ et l'amplificateur d'instrumentation (INA118) un offset de $50~\mu V$;\newline
+$R_g$ la résistance de gain, est à 0,1\%. \newline
+
+Soit $T$ la température et $T_0$ la température de référence (0,00~\degres C dans notre cas). Pour les calculs d'incertitudes pour le cas le plus défavorable, on choisit la température la plus éloignée, $\theta = 30~\tccentigrade$.
+
+\section{Les étapes}
+\subsection*{Incertitude absolue de $V_{ref}$}
+$V_{ref}=\overline{V_{ref}}\pm \Delta V_{ref}$\newline
+\begin{equation}
+\fbox{$V_{ref}=(2,499\pm 0,001)~V$}
+\end{equation}
+\subsection*{Incertitude absolue sur $R_s$, $R$ et $\delta R$}
+$\Delta R_s=(R_s\times 0,1\%)~\Omega$. Soit~:
+\begin{equation}
+\fbox{$R_s=(1000\pm 1)~\Omega$}\newline
+\end{equation}
+De même on trouve 
+\begin{equation}
+\fbox{$R=(100\pm 0,1)~\Omega$}\newline
+\end{equation}
+Pour calculer l'incertitude sur $\delta R$ on choisira le cas le plus défavorable, c'est-à-dire la plus grande variation à mesurer. Pour $\delta R(\theta)=11,67~\Omega$. 
+
+D'où $\Delta \delta R=(\delta R(\theta)\times 0,01\%)=0,0012~\Omega$. Finalement, 
+\begin{equation}
+\fbox{$\delta R=(\delta R\pm 0,001)~\Omega$}
+\end{equation}
+
+\subsection*{Incertitude absolue sur $I$}
+On a $I=\frac{V_{ref}}{R_s}$\newline
+$$dI=\frac{\partial I}{\partial V_{ref}}dV_{ref} + \frac{\partial I}{\partial R_s}dR_s=\frac{1}{R_s}dV_{ref}-\frac{V_{ref}}{R_s^2}dR_s$$ \newline
+On en déduit l'incertitude relative $\Delta I$~:
+
+$$\Delta I=\left|\frac{1}{R_s}\right|\Delta V_{ref}+\left|\frac{-V_{ref}}{R_s^2}\right|\Delta R_s$$ \newline
+Application numérique~:$\Delta I=\left|\frac{1}{100}\right|\times 0,001+\left|\frac{-2,499}{100^2}\right|\times 1$. D'où~:
+\begin{equation}
+\fbox{$I=(2,499\pm 0,004)~mA$}
+\end{equation}
+\subsection*{Incertitude absolue sur $V_0$}
+Soient $V_A$ et $V_B$ tels que $V_0=V_A-V_B$ et $I'$ le courant traversant une sonde. Il faut avant tout déterminer $\Delta I'$.
+
+\subsubsection{Incertitude sur $I'$}
+$I'=I\frac{2R+\delta R}{4R+2\delta R}=\frac{I}{2}=1,2495$. D'où la différentielle suivante~: 
+\begin{eqnarray*}
+dI'&=&\frac{\partial I'}{\partial I}dI \\
+\Delta I'& = & \left|\frac{1}{2}\right|\Delta I=1,7\mu A
+\end{eqnarray*}
+
+\begin{equation}
+\fbox{$I'=(1,250\pm 0,002)~mA$}
+\end{equation}
+
+\subsubsection{Incertitude sur $V_A$}
+On a $V_A=I'\times R$
+
+\begin{eqnarray*}
+dV_A & = &\frac{\partial V_A}{\partial I'}dI' + \frac{\partial V_A}{\partial R}dR \\
+& = & RdI'+I'dR\\
+\Delta V_A & = & |R|\Delta I'+|I'|\Delta R
+\end{eqnarray*}
+
+\begin{equation}
+\fbox{$\Delta V_A=0,325~mV$}
+\end{equation}
+
+\subsubsection{Incertitude sur $V_B$}
+On a
+$$V_B = I\frac{2R+\delta R}{4R+2\delta R}(2R+\delta R)=I\frac{(2R+\delta R)^2}{4R+2\delta R}$$
+
+\begin{eqnarray*}
+dV_B & = &\frac{\partial V_B}{\partial I}dI + \frac{\partial V_B}{\partial R}dR + \frac{\partial V_B}{\partial \delta R}d\delta R\\
+& = &\frac{(2R+\delta R)^2}{4R+2\delta R}dI +I\frac{(8R+4\delta R)(4R+2\delta R)-4(2R+\delta R)^2}{(4R+2\delta R)^2}dR +\\
+& &  I\frac{(4R+2\delta R)(4R+2\delta R)-2(2R+\delta R)^2}{(4R+2\delta R)^2}d\delta R\\
+& = & \frac{(2R+\delta R)^2}{4R+2\delta R}dI +I\frac{16R^2-8\delta R^2}{(4R+2\delta R)^2}dR + I\frac{1}{2}d\delta R
+\end{eqnarray*}
+Pour un cas général on obtient donc~:
+\begin{equation}
+\fbox{$\Delta V_B=\left|\frac{(2R+\delta R)^2}{4R +\delta R}\right|\Delta I+\left|I\frac{16R^2-8\delta R^2}{(4R+2\delta R)^2}\right|\Delta R+\left|\frac{1}{2}\right|\Delta \delta R$}
+\end{equation}
+
+Dans notre étude, nous allons prendre le cas le plus défavorable, c'est-à-dire $T=\theta$. Soit $\delta R=11,67~\Omega$.\newline
+Application numérique~:
+\begin{equation}
+\fbox{$\Delta V_B(\delta R(\theta))=1,157~mV$}
+\end{equation}
+
+\subsubsection{Incertitude sur $V_0$}
+En reprenant le calcul réalisé dans le rapport (page \pageref{V0}) on a~:$$V_0=\frac{I}{2}\times \delta R$$
+Et pour l'incertitude, 
+$$\Delta V_0=\Delta V_A+\Delta V_B=1,482~mV$$
+D'où
+\begin{equation}
+\fbox{$ V_0=(\frac{I}{2}\times \delta R\pm 1,482\times 10^{-3})~V$}
+\end{equation}
+
+
+\subsection*{Incertitude absolue sur $V_s$}
+\subsubsection{Gain}
+Soit $V_s$ le signal disponible en sortie de l'amplificateur d'instrumentation, et $R_g$ sa résistance de gain à 0,1\%. La détermination de $R_g$ est issue de la formule disponible dans la documentation constructeur (voir ci-dessous) pour une pleine échelle (0~V--5~V). 
+\begin{equation}
+\fbox{$R_g=(150\pm 0,15)~\Omega$}\newline
+\end{equation}
+
+On a 
+\begin{eqnarray*}
+G & = & 1+\frac{50\times 10^3~[\Omega]}{R_g}=334,33\\
+dG & = & \frac{\partial G}{\partial R_g}dR_g = \frac{-200\times 10^3}{R_g^2}dR_g\\
+\Delta G & = &  \left|\frac{50\times 10^3}{R_g^2}\right|\Delta R_g= 0,3333~\Omega 
+\end{eqnarray*}
+
+Soit
+\begin{equation}
+\fbox{$G=334,33\pm 0,3333$}\newline
+\end{equation}
+
+\subsubsection{Calcul de l'incertitude sur $V_s$}
+\begin{eqnarray*}
+V_s & = & V_0\times G\\
+dV_s & = & \frac{\partial V_s}{\partial V_0}dV_0 + \frac{\partial V_s}{\partial G}dG=GdV_0+V_0dG\\
+\Delta V_s(\theta) & = & G\cdot\Delta V_0 + V_0\cdot\Delta G
+\end{eqnarray*}
+
+Application numérique pour $T=\theta$~:$\Delta V_s=0,5003~V$. On en déduit donc que les $5~\mu$V d'offset de l'INA118 sont négligeables.
+
+\begin{equation}
+\fbox{$ V_s=(G\cdot\frac{I}{2}\cdot\delta R\pm 0,5003)~V$}
+\end{equation}
+
+\subsection*{Calcul final}
+Des calculs précédents, on trouve (avec l'incertitude valable pour une plage 0--30~\degres C)~:
+\begin{equation}
+V_s=\left (G\cdot\frac{I}{2}\cdot\delta R \pm 0,5003\right )~V
+\label{Vs}
+\end{equation}
+
+Les tables (annexe~\ref{tablePt100}) donnent la résistance standard $R_{Pt100}$ de la Pt100 à la température $T$, pour une résistance nominale $R_0=100,00$ Ohm à la température de référence $T_0=0~\tccentigrade $. Dépendance pouvant être approximée par la relation~:
+
+$R_{Pt100}=R_0\left (1+A\cdot\Delta T +B\cdot\Delta T ^2\right )$, où~: $\Delta T =T -T _0$. Avec $A=3,9083\times 10^{-3}~K^{-1}$ et $B=-5,775\times 10^{-7}~K^{-2}$.
+Ce qui donne pour déterminer la température~:
+$T=T_0+\frac{\sqrt{A^2+4B\cdot r}-A}{2B}$, où 
+\begin{equation}
+r=\frac{R_{Pt100}}{R_0}-1
+\label{r}
+\end{equation}
+
+
+Or on a $R_0=R$ et $R_{Pt100}=R+\delta R$. Notre variable étant $V_s$, la tension disponible en entrée du PIC, il ne faut obtenir que $V_s$ pour calculer la température. On l'obtient par la relation \eqref{Vs}. Soit,
+$$ \delta R=\frac{2V_s}{G\cdot I}$$
+
+d'où~:
+	
+ 
+
+\begin{eqnarray*}
+r & = & \frac{R+ \delta R}{R}-1 = \frac{\delta R}{R} = \frac{2V_s}{G\cdot I\cdot R}\\
+dr & = & \frac{\partial r}{\partial V_s}dV_s + \frac{\partial r}{\partial G}dG+ \frac{\partial r}{\partial I}dI+ \frac{\partial r}{\partial R}dR\\
+& = & \frac{2}{G\cdot I\cdot R}dV_s-2V_s\left ( \frac{dG}{G^2\cdot I\cdot R} + \frac{dI}{G\cdot I^2\cdot R} + \frac{dR}{G\cdot I\cdot R^2} \right )\\
+& = & \frac{2}{G\cdot I\cdot R}dV_s-2\frac{G\cdot I\cdot\delta R}{2}\left ( \frac{dG}{G^2\cdot I\cdot R} + \frac{dI}{G\cdot I^2\cdot R} + \frac{dR}{G\cdot I\cdot R^2} \right )\\
+\Delta r & = & \frac{2}{G\cdot I\cdot R}\Delta V_s+\delta R\left ( \frac{\Delta G}{G\cdot R} + \frac{\Delta I}{I\cdot R} + \frac{\Delta R}{R^2} \right )
+\end{eqnarray*}
+
+Soit l'application numérique pour le cas le plus défavorable~: $\Delta r = 0,0124$
+
+
+Finalement on obtient~:
+\begin{equation}
+\fbox{$T=T_0+\frac{\sqrt{A^2+4B\cdot r}-A}{2B}$}
+\label{Tfin}
+\end{equation}
+Avec
+\begin{equation}
+\fbox{$r=\frac{2V_s}{G\cdot I\cdot R}\pm 0,0124 $}
+\label{Rfin}
+\end{equation}
+
+
+\subsection*{Incertitude finale}
+On reprend $r  =  \frac{\delta R(\theta)}{R}$ pour calculer l'incertitude sur $T$~:
+\begin{eqnarray*}
+T & = & T_0+\frac{\sqrt{A^2+4B\cdot r}-A}{2B}\\
+dT & = & \frac{\partial T}{\partial r}dr = \frac{1}{2B}\cdot\frac{4B}{2\sqrt{A^2+4B\cdot r}}dr = \frac{1}{\sqrt{A^2+4B\cdot r}}dr\\
+\Delta T & = & \left |\frac{1}{\sqrt{A^2+4B\cdot r}}\right | \Delta r
+\end{eqnarray*}
+
+
+Application numérique~:$\Delta T = 0,066~\tccentigrade$
+
+
+\subsection*{Résultat}
+
+Théoriquement, on obtient une mesure fidèle à 0,1~\degres C (avec une marge de 0,03~\degres C). Avec pour relations~:
+\begin{center}
+	\shadowbox{
+\vspace{4mm}
+		\begin{Beqnarray} 
+		T & = & \left (T_0+\frac{\sqrt{A^2+4B\cdot r}-A}{2B}\pm 0,07\right ) \tccentigrade \label{rslt}\\
+		r & = & \frac{2V_s}{G\cdot I\cdot R}\pm 0,0124 \label{rslt2}\\
+		A & = & 3,9083\cdot 10^{-3}~K^{-1} \\
+		B & = & -5,775\cdot 10^{-7}~K^{-2}\\
+		T_0 & = & 0,00~\tccentigrade
+		\end{Beqnarray}
+\vspace{4mm}
+	}
+\end{center}
+
+Avec pour le circuit présenté~:
+\begin{eqnarray}
+	G & = & 425,53\pm 0,4255 \\
+	I & = & (2,499\pm 0,004)~mA \\
+	R & = & (100\pm 0,1)~\Omega 
+\end{eqnarray}
+

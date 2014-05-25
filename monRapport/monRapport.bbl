@@ -1,0 +1,57 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname fonteauteurs\endcsname\relax
+\def\fonteauteurs{\scshape}\fi
+
+\bibitem{alloy}
+Alloy.
+\newblock \url{http://alloy.mit.edu/alloy/}.
+
+\bibitem{cloud}
+Cloud computing.
+\newblock \url{http://fr.wikipedia.org/wiki/Cloud_computing}.
+
+\bibitem{developpez}
+Developpez.
+\newblock \url{http://www.developpez.net/}.
+
+\bibitem{dom}
+Document object model.
+\newblock \url{http://fr.wikipedia.org/wiki/Document_Object_Model}.
+
+\bibitem{excelpratique}
+Excel pratique.
+\newblock \url{http://www.excel-pratique.com}.
+
+\bibitem{google}
+Google code.
+\newblock \url{http://code.google.com/p/planbyco/}.
+
+\bibitem{infogerance}
+Infogérance.
+\newblock \url{http://fr.wikipedia.org/wiki/Infogérance}.
+
+\bibitem{api}
+Interface de programmation.
+\newblock \url{http://fr.wikipedia.org/wiki/Interface_de_programmation}.
+
+\bibitem{javadoc}
+Javadoc.
+\newblock \url{http://docs.oracle.com/javase/6/docs/api/}.
+
+\bibitem{jetty}
+Jetty.
+\newblock \url{http://www.eclipse.org/jetty/}.
+
+\bibitem{macro}
+Macro-commande.
+\newblock \url{http://fr.wikipedia.org/wiki/Macro-commande}.
+
+\bibitem{subversion}
+Subversion (svn).
+\newblock \url{http://subversion.tigris.org/}.
+
+\bibitem{tomcat}
+Tomcat.
+\newblock \url{http://tomcat.apache.org/}.
+
+\end{thebibliography}

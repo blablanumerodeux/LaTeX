@@ -1,0 +1,26 @@
+\section{Présentation des missions}
+% \chapter{Description des missions}
+
+\subsection{La maintenance à Disneyland}%maintenance
+\paragraph{}
+\newacronym{sm7}{SM7}{\foreignlanguage{english}{Serice Manager version 7}}
+Ma première mission consistait à appuyer les techniciens en cas de grand nombre d'interventions. Chaque intervention est soumise à des délais. Cela consistait à réceptionner un \gls{ot}\footnote{Ordres de Travail} par fax (et via le logiciel propriétaire \gls{sm7} dont je vous parlerais dans la partie "développement" de ce rapport) et de se rendre sur le lieu de l'intervention avec le matériel adéquat. Ces \gls{ot} sont envoyés par la \foreignlanguage{english}{hotline}. La nature des interventions peut variée. Cela va du simple changement de souris sur un PC\footnote{\foreignlanguage{english}{Personal Computer}} de bureau (dans le \Gls{back office}), à la "remasterisation" d'une caisse récupérée sur le parc. J'assurais donc un soutien aux techniciens durant les périodes de \foreignlanguage{english}{rush}, le plus souvent pendant les vacances scolaires.
+\subparagraph{}
+Cette première mission à occupé une place importante de mon apprentissage. En effet, j'effectuais ponctuellement des interventions, tout au long de l'année. Je vais maintenant vous parler de ma deuxième mission.
+
+
+\subsection{Rapports d'intervention et statistiques}%rapport/stat des interventions
+\newglossaryentry{macros}{name={macros-commandes},description={Enregistrement des actions effectuées par un utilisateur, au clavier et à la souris, afin de pouvoir les rejouer dans le même ordre automatiquement par la suite. cf. \url{http://fr.wikipedia.org/wiki/Macro-commande}}}
+\newglossaryentry{backlog}{name={\foreignlanguage{english}{backlog}},description={Nombre d'incidents non résolus à la fin de la journée}}
+\paragraph{}
+Par la suite, j'ai appris le \gls{vba} et commencé à développer des \gls{macros}\footnote{Enregistrement des actions effectuées par un utilisateur, au clavier et à la souris, afin de pouvoir les rejouer dans le même ordre automatiquement par la suite. cf. \url{http://fr.wikipedia.org/wiki/Macro-commande}} dans le but d'établir un rapport sur la productivité des techniciens. Je devais traiter des informations extraites du logiciel propriétaire (sous forme d'un tableau Excel) et automatiser des calculs sur ces données après les avoir préalablement traitées. Puis, ce rapport est envoyé au centre de services à Rungis. J'ai ensuite rempli un tableau de bord pour visualiser les données calculées sur une année. 
+Ce tableau de bord ne devait pas être recréé : je devais le compléter sans effacer certaines données (comme le \gls{backlog}\footnote{Nombre d'incidents non résolus à la fin de la journée}). 
+Ce tableau de bord était rempli manuellement par la \gls{team}.%\foreignlanguage{english}{team leader}.
+\subparagraph{}
+Cette partie de mon apprentissage m'a permis de mettre à l'épreuve mes connaissances algorithmiques. J'ai ensuite continué le développement avec une mission qui a mobilisé une grande partie de mes compétences informatiques.
+
+
+
+\subsection{Développement d'un outil de gestion d'emplois du temps}%emploi du temps
+\paragraph{}
+Enfin, ma dernière mission consistait à développer un outil de gestion d'emplois du temps permettant à la \foreignlanguage{english}{team leader} de mettre à jour les emplois du temps des techniciens à n’importe quel moment. Lors d'une mise à jour d'un emploi du temps, tout le monde devait en être informé en temps réel. De plus, cela devait permettre une supervision du nombre d'heures travaillées. Les emplois du temps devaient être consultables par les techniciens, selon la semaine ou le trigramme choisis. La liste des techniciens présents devait pouvoir être extraite pour chaque jour. Un système de permissions restreignant les droits de modifications devait être mis en place.

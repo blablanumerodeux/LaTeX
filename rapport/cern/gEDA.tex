@@ -1,0 +1,225 @@
+\section{gEDA}
+Les logiciels de Conception électronique Assisté par Ordinateur (CAO) propriétaires sont une bonne solution pour débuter rapidement et obtenir simplement des cartes exploitables. 
+
+Mais ne serait-il pas plus souhaitable d'utiliser un outil complètement personnalisable avec lequel on n'obtient très rapidement des cartes au rendu professionel~? Ceci est possible grâce aux logiciels libres. gEDA en est idéal pour la CAO. C'est un outil en plein développement mais d'ores et déjà évolué. 
+
+De nombreuses librairies sont disponibles et il est très rapide d'en ajouter. Il en existe deux mécanismes. Le premier appelé \og Oldlib \fg\, \og pcblib \fg\ ou \og bibliothèque M4 \fg\ dépend du langage macro M4. Les empreintes sont générées à la volée. \` A utiliser pour creer rapidement des familles d'empreintes. Le deuxième mécanisme est appelé \og Newlib \fg . Ce sont les empreintes que l'on peut creer graphiquement avec Pcb, ou avec un éditeur de texte (code ASCII). \newline
+
+gEDA pour GPL Electronic Design Automation est une suite Open Source permettant la création de schémas, la simulation et la réalisation du Printed Circuit Board (PCB). \newline
+
+Cette suite d'outils est principalement composée de :
+\begin{itemize}
+\item[-] \textbf{gschem}, l'éditeur de schémas et de symboles,
+\item[-] \textbf{gnetlist}, un translateur vers d'autres utilitaires,
+\item[-] \textbf{PCB}, un outil de dessins de circuits imprimés et de création d'empreintes,
+\item[-] \textbf{ngspice}, un clone de spice avec des fonctions étendues,
+\item[-] \textbf{gnucap}, un simulateur original avec compilateur de modèles,
+\item[-] \textbf{geda}, le gestionnaire de projet (non actuel).
+\end{itemize}
+
+\vspace{5mm}
+Attention à l'utilisation de geda le gestionnaire de projet. Il n'a pas suivi l'évolution des autres programmes, il est donc préférable de ne pas l'utiliser. Un terminal suffit pour relier les différents outils.\newline
+
+%%
+
+\subsection{installation}
+Avant tout il faut l'installer. La dernière version de gEDA nécessite python 2.5 ou supérieur. Il est possible que gEDA, ainsi que toutes ses dépendances, soit dans les dépôts de votre distribution (voir par exemple avec Synaptic). Mais ce ne sera peut-être pas la dernière version. Pour cette suite en constante évolution il est important d'avoir la dernière version, pour éviter certains bogues.\newline
+
+
+Une autre possibilité est de télécharger l'image iso du CD. Elle inclut la dernière version de tous les programmes. Ainsi que les dépendances nécessaires. Voir dans la partie download du site officiel : \url{http://www.geda.seul.org/}\label{sitegEDA}. La solution la plus simple est de monter le cd sur un lecteur virtuel. Très simple sous linux.
+\begin{center}
+\ovalbox{\$ sudo mount -oloop <image>.iso /mnt} 
+\end{center}
+\vspace{2mm}
+
+Pour poursuivre l'installation l'aide nécessaire se trouve sur le CD. En ce qui concerne les tutoriaux, attention à bien lire les dernières versions.\newline
+
+
+Une fois l'installation terminée, il faut avoir le synoptique de la suite logicielle en tête pour commencer une carte.
+\begin{center}
+\begin{figure}[h!]
+	\includegraphics[width=8cm]{./img/gedaSy}
+	\caption{Synoptique de la suite gEDA}
+\end{figure}
+\end{center}
+\vspace{2mm} 
+
+Tout commence avec gschem. Une fois le schéma réalisé et vérifier avec le contrôleur DRC il faut créer la netliste. Grenum sert à assigner une référence à tous les composants. Ce qui peut être réalisé automatiquement avec gschem. De même gattrib permet d'assigner des empreintes aux composants. Mais il est plus évident au début de le faire sous gschem. 
+gsch2pcb permet de créer la netlist et le fichier *.pcb. Pcb permet de placer les composants et de router les connexions générées par la netlist. Enfin, les fichiers Gerber sont exportés par Pcb.
+
+
+%%
+\subsection{gschem}
+gschem est un logiciel permettant de rapidement créer des schémas pour peu que nous l'ayons bien en main. Il existe une multitude de raccourcis permettant d'aller plus vite. \newline
+
+Il est conseillé de créer un dossier de projet, car de nombreux fichiers seront créés. Une fois gschem ouvert (commande \og gschem\fg), vous verrez une interface simple d'utilisation~: seulement quelques icônes sont dans la barre des tâches. Possibilité d'ajouter des composants, de créer des fils de connexion voire des bus de données. Pour tourner les composants ou toute autre tâche utile, il est bien plus rapide de se servir des raccourcis.
+gschem étant en français, il est très rapide de trouver les fonctions désirées.\newline
+
+En vue de simplifier la génération de la netlist, veuillez à bien renseigner au minimum trois champs importants pour gschem. 
+
+Double-cliquer sur un composant pour ouvrir ses propriétés. En général le champ \textbf{device} et  \textbf{refdes} est rempli. Le champ de loin le plus important est \textbf{footprint}, il permet de spécifier quelle empreinte prendre pour ce composant. N'importe quel symbole (ou composant) peut appeler n'importe quelle empreinte. Cela permet de créer une seule empreinte pour plusieurs composants. Ils seront différenciés sous Pcb par leur identifiant device et refdes. Une fois les composants ajoutés, il est possible de renseigner automatiquement tous les champs refdes par \og Attributs -> Annotation automatique\fg. Les champs slot et numslot permettent de spécifier le numéro de la porte  lorsqu'il y en a plusieurs par boîtier.\newline
+
+Lors de la création de symboles il faut spécifier le champ \textbf{pintype} pour que le vérificateur d'erreurs (DRC) puisse vérifier les erreurs de connexions. Les différentes options pour ce champ sont \og io\fg\ pour une entrée-sortie, \og pas\fg\ pour une broche passive, \og in\fg\ pour une entrée, \og out\fg\ pour une sortie et \og pwr\fg\ pour une alimentation.\newline
+
+Une fois que le schéma est fini, il faut le vérifier avec le DRC puis corriger les erreurs. Lancer le code ci-dessous dans un terminal au même endroit que votre projet.
+
+\begin{center}
+\ovalbox{\$ gnetlist -g drc2 text.sch -o drc\_output.txt} 
+\end{center}
+
+le résultat de DRC est visible dans le fichier drc\_output.txt. \newline
+
+Personnellement, je trouve plus simple de lire le résultat directement dans la console:
+\begin{center}
+\ovalbox{\$ gnetlist -g drc2 text -o -} 
+\end{center}
+
+Si vous rencontrez une erreur du type 
+
+\begin{quote}
+Checking slots~\dots\newline
+ERROR: Reference U5: Slot out of range (1).\newline
+slotnumber~=~1\newline
+\end{quote}
+
+Vous avez sûrement une empreinte avec un nom finissant par une minuscule. Ce qui est interprété comme le numéro d'une porte logique à l'intérieur d'un composant. S'il ne s'agit pas d'une erreur il est possible de passer outre en spécifiant le champ \textbf{numslot} à 0.\newline
+
+
+La netlist est crée en même temps que le rapport du DRC, il faut donc maintenant invoquer gsch2pcb pour commencer le routage.
+\begin{center}
+\ovalbox{\$ gsch2pcb -v text.sch} 
+\end{center}
+L'option verbose (-v) est facultative, mais permet de suivre les différentes erreurs dues principalement à des empreintes introuvables. La double option verbose (\$~gsch2pcb~-v~-v~text.sch) permet de voir tous les fichiers scannés pour trouver les différentes empreintes.
+Lorsqu'il n'y a plus d'erreurs, il faut passer sur Pcb. Le fichier text.pcb est créé par gsch2pcb. Il faut maintenant l'ouvrir avec Pcb.\newline
+
+Je précise que les principales démarches à suivre sont rappelées par gsch2pcb à la fin du rapport. Lors d'une première exécution on peut lire par exemple:
+
+\begin{quote}
+Next step:
+\begin{itemize}
+\item[1.]  Run pcb on your file test.pcb.
+    You will find all your footprints in a bundle ready for you to place
+    or disperse with \og Select -> Disperse all elements\fg\ in PCB.
+
+\item[2.] From within PCB, select \og File -> Load netlist file\fg\ and select 
+    test.net to load the netlist.
+
+\item[3.] From within PCB, enter
+		:ExecuteFile(test.cmd)\newline
+\end{itemize}
+\end{quote}
+ 
+
+Lors d'une mise à jour (le fichier test.pcb existe déjà) d'autres conseils apparaissent :
+\begin{quote}
+Next steps:
+\begin{itemize}
+\item[1.] Run pcb on your file test.pcb.
+\item[2.] From within PCB, select \og File -> Load layout data to paste buffer\fg\
+    and select test.new.pcb to load the new footprints into your existing layout.
+\item[3.] From within PCB, select \og File -> Load netlist file\fg\ and select 
+    test.net to load the updated netlist.
+
+\item[4.]From within PCB, enter
+           :ExecuteFile(test.cmd)\newline
+\end{itemize}
+\end{quote}
+
+
+Dans tous les cas la prochaine étape est Pcb.
+
+
+%%%%
+\subsection{Pcb}
+\parpic[r]{\includegraphics[width=25mm]{./img/pcb}}Je conseille d'ouvrir directement Pcb par un autre terminal puisque le programme retourne un certain nombre d'erreurs (notamment \og unknown action\fg\ pour une commande inconnue) . Procéder par \ovalbox{\$~pcb~test.pcb} tout en étant dans le répertoire du projet.\newline
+Pcb ouvre automatiquement une fenêtre de log qui retourne les différentes actions de l'utilisateur prises en compte par le programme.\newline
+
+Une fois le fichier test.pcb ouvert il faut réorganiser les composants (Select -> Disperse all elements).
+Il ne reste plus qu'à importer la netlist (File~->~Load netlist file). Ensuite lancer le fichier test.cmd par l'invite de commande (le raccourci pour cette action est [:]). \ovalbox{ExecuteFile(test.cmd)}. Puis remettre à jour. Action possible par la touche de raccourci [O]. 
+Si les fils de connexions (ratsnet) ne sont pas visibles, activer l'option en cliquant sur le bouton \og ratsnet\fg\ (à gauche).\newline
+
+\begin{center}
+\shadowbox{
+\begin{minipage}{0.7\textwidth}
+Pour mettre à jour le PCB si un changement doit apparaître (modification sous gschem des connexions ou composants par exemple), lancer le DRC pour vérifier et régénérer la netlist, ce qui a pour effet de créer un fichier test.pcb.new. Ouvrir ce fichier par \og File -> Load layout-data to past buffer \fg. Recharger la netlist, lancer la commande ExecuteFile(test.cmd) et réactualiser les fils de connexions ([O]). 
+\end{minipage}
+} \newline
+\end{center}
+
+
+
+{\Large Pour une prise en main assez rapide de Pcb:\newline}
+
+Dans la barre d'outils verticale (sur la gauche) il est possible de sélectionner l'affichage des plans, via, pistes etc. Par défaut il existe plusieurs couches avec une couleur pour chaque signal (alimentation, données~\dots). Il est possible de modifier ces options par \og File -> Preference\fg.
+
+En dessous sont représentés les outils de dessins. Line pour les pistes, polygon pour les plans de masses par exemples, LOCK pour vérouiller un composant. Utile par exemple pour les plans ou les gros composants, cela évite de le sélectionner alors que l'ont visait une piste. L'outil THRM permet rapidement d'ajouter ou d'enlever des freins thermiques aux pastilles.
+
+Pour déplacer un composant avec ses pistes (ou ratsnet), le clic souris suffit. Parfois il est préférable de déplacer un composant sans ses connexions. Pour cela il faut le sélectionner (clic souris) puis le déplacer par un autre clic souris.
+
+Plusieurs actions sont disponibles par [shift]+Clic droit. Notamment supprimer l'ensemble de la sélection.
+La touche [Shift] lors d'un tracé de piste sert à modifier la position de l'angle. Très pratique!
+
+Pour une mesure rapide [CTRL]+[M] ré-affecte l'origine (les mesures sont en haut à droite). Pour avoir la vue de la face de dessous il suffit de presser la touche [TAB]. Alors que [B] permet de passer le composant d'une face à l'autre. 
+
+[U] pour \og Undo\fg\ (annuler) et [Shift]+[R] pour \og Redo\fg\ (restaurer). 
+
+[Q] permet de modifier l'apparence des pastilles (rondes ou carrées).[D] permet d'afficher rapidement le numéro des broches et [shift]+[D] en donne l'apperçu. 
+
+[O] qui permet de réactualiser les connexions est souvent utilisée de même que [F] qui permet de mettre en surbrillance les connexions directes. [S] et [shift]+[S] servent à modifier la taille des pastilles, pistes, etc. 
+
+[V] permet d'avoir une vue globale de la carte. Pour le reste des raccourcis utilisés, voir dans \og Window -> Key References\fg.\newline
+
+Attention à bien activer l'option \og Settings -> New lines, arcs clear polygon\fg\ si vous devez faire un plan de masse ou autre par la suite. \` A défaut vous retrouverez toutes vos pistes court-circuitées par le plan. Attention cela pose problème pour les freins thermiques. Citation: \og à consommer avec modération\fg.
+
+Cependant il est toujours possible d'activer l'option à la fin,  un travail assez rébarbatif.
+Dans les tutoriaux on peut trouver la commande \og :changejoin(selected)\fg\ pour changer l'option sur toutes les pistes sélectionnées, mais cela n'avait aucun effet sur ma version. Découvert par le \og unknown action\fg\ retourné dans le terminal. La touche raccourci pour le même résultat est [shift]+[J]. Il est possible de modifier la clearance des pistes (espace vide entre la piste et le plan) par la touche [K] (et [shift]+[K]).\newline
+
+Lorsque vous avez le programme en main, il est très rapide de router ses cartes puisque le logiciel permet d'un clic de copier des éléments dans un tampon (éléments précédemment créés). On peut donc avoir à portée de clic des dessins souvent utiles (logo, empreinte de frein thermique, etc.)\newline
+
+{\Large Créer des empreintes (Footprint):}\newline 
+
+Partir d'un élément existant est le plus rapide. Il est possible (et très utile, pour vérification notamment) de créer des empreintes directement sur notre PCB. 
+
+Pour ce faire, ouvrir le gestionnaire de librairie par \og Window~->~library\fg. Ajouter le composant le plus ressemblant. Le sélectionner pour ensuite le copier dans le buffer ([CTRL]+[X]). Maintenant il faut le convertir en \og pièce\fg\ : \og Buffer~->~Convert~buffer~to~pieces\fg. Coller cette pièce. 
+
+Il est maintenant possible de jouer avec tous ces élements. Numéroter les broches avec la touche [N]. Une fois toutes les modifications effectuées, copier la pièce dans le buffer puis \og Buffer~->~Convert~buffer~to~elements\fg\ pour enfin l'enregistrer \og Buffer~->~Save~buffer~to~File\fg.
+
+Noter que les pastilles \og carrées\fg\ sont obtenues par des lignes \og arrondies\fg\ et ensuite modifiés avec la touche [Q] (une fois converties en élement).\newline
+
+\textbf{Attention, si le nom des empreintes contient une minuscule comme dernier caractère, elle sera considérée comme une porte à l'intérieure d'un autre composant (souvent nommée a, b, c~\dots) Elles seront ignorées. Il faut mettre un chiffre ou une majuscule.}\newline
+
+Pour plus d'informations : \newline
+\url{http://ronja.twibright.com/guidelines/footprints.php}, pour une plus grande explication sur la création d'empreintes graphiques (par Pcb).\newline
+\url{http://www.brorson.com/gEDA/land_patterns_20050129.pdf}, un tutoriel pour dessiner ses empreintes à la main, avec un éditeur de texte.\newline
+
+
+
+
+Une fois le PCB terminé, d'un clic on peut exporter la carte en fichier Gerber, png, ps, eps~\dots 
+
+
+
+%\section{Conclusion sur gEDA}
+
+Une des plus grandes richesses de gEDA est le traitement des données entre les différents programmes. Tous les fichiers sont en ASCII ce qui les rend très facile à manipuler. Il est donc possible de se créer des scripts pour automatiser des tâches rébarbatives. Habituellement le Perl est utilisé pour cela. Voici les scripts distribués par gEDA~:\newline
+\begin{itemize}
+\item[1.] John Luciani possède un large éventail de scripts disponibles sur son site we (\url{http://www.luciani.org/}). Dans cette collection, des scripts sont inclus pour générer des empreintes, notamment Footgen.
+\item[2.] David Rowe possède des scripts pour mettre à jour des éléments de même qu'ajouter/supprimer des fichiers PCB les uns des autres sur son site web (\url{http://www.rowetel.com/perl4pcb.html}).
+\item[3.] Stuart Brorson a écrit un script simple qui génère des empreintes pour deux ponts thermiques passifs en SMD. Un tarball gzippé est disponible à \url{http://www.brorson.com/gEDA/Smtgen.pl.gz}.\newline
+\end{itemize}
+
+
+Une fois en main, gEDA est à la fois simple et rapide à utiliser. De plus beaucoup de librairies sont disponibles sur \textbf{\url{http://www.gedasymbols.org/}}. Il est également possible de demander sur la liste des geda-user si ce composant est disponible. Pour cela voir \url{http://geda.seul.org/mailinglist/index.html}. \newline
+
+Pour la recherche de librairies, suivre les liens précédemment cités ou \textbf{\url{http://www.gedasymbols.org/}}. On en apprend également beaucoup sur \url{http://www.geda.seul.org/wiki/geda:usage.fr}.\newline
+
+Sur divers sites internet on trouve des tutoriaux pour gEDA, mais en général ils ne sont pas à jour. Tout le problème est là. Les plus intéressants sont les tutoriaux des logiciels et non de la suite. Eux sont à jour. Je pense par exemple au tutorial de Pcb disponible sur \url{http://pcb.sourceforge.net/manual.html}. Pour comprendre un peu mieux la gestion d'un projet sous gEDA il peut être utile de lire le tutorial en Français disponible là~: \url{http://www.iznogood-factory.org/pub/gEDA/tutorialfr.html}. Il n'est pas basé sur la dernière version, car certaines configurations ont changées. Sur ce site (\url{http://ofset.sourceforge.net/freeduc/book/book_29.html}) est disponible un exemple rapide de prise en main de Pcb. En lisant plusieurs tutoriaux dont la version n'est plus à jour, il est plus simple de voir ce qui est toujours d'actualité. Pour une aide à la création d'empreinte, voir~: \url{http://www.iznogood-factory.org/pub/gEDA/land_patterns_fr.pdf}.\newline
+
+Ce qui peut perturber au début c'est la profusion de raccourcis. Tant pour gschem que pour Pcb. Attention à ne pas tester toutes les touches sans vérifier au risque de voir plus tard que la grille a été modifiée, que le pas n'est plus en inch mais en millimètres, etc. A noter également que les racourcis sont différents suivant les programmes. 
+
+Le seul inconvénient notable de gschem est la fonction \og undo\fg. Lorsque l'on annule les dernières opérations, le zoom est pris en compte.\newline
+
+gEDA est donc une suite très complète. Sa principale difficulté de prise en main repose sur le fait que les tutoriaux ne sont pas à jour. Il faut préférer l'aide de Pcb.
+
+Néanmoins cela reste une suite pour les concepteurs ne souhaitant pas se préocuper d'une license payante et souhaitant un travail de professionnel. Pour obtenir ce résultat il faut bien entendu y passer un peu de temps, mais qui sera largement récompensé par la suite en efficacité. De plus, il y a réellement une grande bibliothèque de composants rapidement utilisables. Cela peut surprendre au début d'enregistrer des empreintes avec l'éditeur de texte, mais rien n'est plus facile que de copier, voire modifier du texte.\newline
+

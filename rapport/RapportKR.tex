@@ -1,0 +1,355 @@
+\documentclass[a4paper,12pt,oneside]{report} %syntonly]
+%\usepackage{pstricks,listings} %% Package Tres complet! Une vraie Usine a Gas !!
+\usepackage[latin1]{inputenc}     % pour Unix Latin1 
+% \usepackage[applemac]{inputenc} % pour utilisateurs mac
+% \usepackage[ansinew]{inputenc}  % pour Windows ANSI (yen a encore qui utilisent ca? :s)
+\usepackage{verbatim} 
+%\usepackage{fullpage}
+\usepackage{aeguill}
+\usepackage{amsfonts}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{textcomp} 
+\usepackage{cancel} 
+\usepackage{mathcomp} 
+\usepackage{makeidx}
+\usepackage{lscape} % pour avoir une page en paysage
+%\usepackage{acronym}
+\usepackage{picins}
+%latex RapportKR.tex
+%makeindex RapportKR.idx
+%latex RapportKR.tex
+\usepackage{fancybox}
+\usepackage{shapepar}	% pour les mises en forme de texte (losange etc)
+\usepackage{fancyhdr}
+\usepackage{textcomp}  % pour les caractères spéciaux (copyleft etc)
+\usepackage{marvosym} % caractere electrostatic, laserbeam...
+\usepackage{supertabular}% tableaux sur plusieurs pages
+\usepackage{ifsym} % caractères scpéciaux
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{upgreek}
+\usepackage{picins}
+%\usepackage{frbib}
+%\usepackage{lastpage}
+\usepackage[english,french]{babel}
+%%%%%%%%%%%%% parallel, multicolpar et parcolumns.%%%%%%%%%%%%%%%%%%%%%% pour des documents multicolones bilingue.
+\usepackage[pdftex]{graphicx, color}
+\usepackage{pdfpages}
+\graphicspath{{img/}} % La ou j'ai mes images
+\DeclareGraphicsExtensions{.jpg,.png}
+\pdfoutput=1
+\usepackage[pdftex,
+	a4paper,
+        bookmarks = true,           % Signets
+        bookmarksnumbered = true,   % Signets numerotes
+        pdfpagemode = None,         % Signets/vignettes fermes a l'ouverture
+        %pdfstartview = FitH,        % La page prend toute la largeur
+	pdfstartview = FitV,        % La page prend toute la hauteur
+	colorlinks=true,
+	citecolor=black,urlcolor=blue,linkcolor=red,
+	pdfauthor={Kévin Raymond},
+	pdftitle={Stage au CERN},
+ 	pdfsubject={Rapport de stage},
+	pdfkeywords={Xbee, pt100, PIC, GNU, Linux, CAO, gEDA},
+	plainpages=false,
+	pdfpagelabels,
+	bookmarks,
+	breaklinks=true,
+   	hyperindex,
+	linktocpage=true % pour colorier seulement le numéros dans la TOC	
+]{hyperref}
+%
+\pdfcompresslevel=9
+%
+%
+%%% style sans serif pour les url
+\urlstyle{sf}
+%
+%%%% debut macro %%%%  Pour mettre en forme Chapitre
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{10\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \ifnum \c@secnumdepth >\m@ne
+        \Huge\bfseries \thechapter\quad
+    \fi
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+%
+\def\@makeschapterhead#1{%
+  \vspace*{10\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Huge \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+%%% Reglage des marges
+\setlength{\hoffset}{-25pt}  	
+\setlength{\voffset}{-18pt}  	
+\setlength{\oddsidemargin}{50pt} 	% Marge gauche sur pages impaires
+\setlength{\evensidemargin}{9pt} 	% Marge gauche sur pages paires
+\setlength{\marginparwidth}{54pt} 	% Largeur de note dans la marge
+\setlength{\textwidth}{420pt} 	% Largeur de la zone de texte (17cm)
+\setlength{\marginparsep}{7pt} 	% Séparation de la marge
+\setlength{\topmargin}{0pt} 	% Pas de marge en haut
+\setlength{\headheight}{33pt} 	% Haut de page
+\setlength{\headsep}{40pt} 	% Entre le haut de page et le texte
+\setlength{\paperwidth}{600pt}
+\setlength{\footskip}{27pt} 	% Bas de page + séparation
+\setlength{\textheight}{650pt} 	% Hauteur de la zone de texte 
+%
+
+%%%% debut macro %%%%
+\newenvironment{changemargin}[2]{\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0pt}%
+\setlength{\rightmargin}{0pt}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{0pt plus 1pt}%
+\addtolength{\leftmargin}{#1}%
+\addtolength{\rightmargin}{#2}%
+}\item }{\end{list}}
+%%%% fin macro %%%%
+
+
+\pagestyle{fancy} %éviter le style par défaut.
+%
+%% Def des entetes, ce referer a http://www.trustonme.net/didactels/250.html
+\fancyhead[LO]{\textsc{\rightmark} \rule[0.5ex]{\textwidth}{0.4mm}}
+%\fancyhead[C]{}
+\fancyhead[R]{\includegraphics[width=1cm]{./img/AB.jpg}}
+\fancyfoot[R]{\footnotesize{\textsc{Rapport de Stage}}}	
+\fancyfoot[C]{\footnotesize{- \thepage} -}	
+\fancyfoot[L]{\footnotesize{\Laserbeam\ \textit{Kévin Raymond}}}	
+%
+%%% Ajouter une fine ligne en haut et en bas
+\renewcommand{\headrulewidth}{3pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%\pagestyle{headings}
+%
+%
+%
+%
+%
+%
+%
+%
+%%%%%%%%% Mise en Forme page de garde %%%%%%%%%%%%%%%%%%%%
+%######################## Définition du titre ######################
+\title{
+\thispagestyle{empty}
+\vspace{-40mm}
+%\Ovalbox{
+   \begin{minipage}[c][150pt][c]{.40\linewidth} %[hauteur][position]{largeur}
+	{\normalsize 
+		\begin{flushleft}
+		\vspace{3mm}
+	      	CERN\\
+		Organisation Européenne pour\\
+		la Recherche Nucléaire\\
+		F-01631 CERN Cedex\\
+		France\\
+		\url{http://www.cern.ch/}\\
+		\vspace{2mm}
+		\includegraphics[width=2cm]{./img/CERN_logo}
+		\vspace{3mm}
+		\end{flushleft}
+	}
+   \end{minipage}\hfill
+%}
+\hspace{15mm}
+%
+%\Ovalbox{
+   \begin{minipage}[c][150pt][c]{.40\linewidth} %[hauteur][position]{largeur}
+	{\normalsize 
+		\begin{flushright}
+		\vspace{3mm}
+		Kévin Raymond\\
+		IUT Annecy\\
+		Département GEII\\
+		Année 2007\\
+		\vspace{2mm}
+		\includegraphics[width=5cm]{./img/A}
+		\vspace{3mm}
+		\end{flushright}
+	}
+   \end{minipage}
+%}
+\vfill
+\vspace{30mm}
+%
+%
+   {\Huge \textsc{Rapport de Stage}}\\
+\vspace{6mm}
+%\Ovalbox{
+\rule{\linewidth}{0.8mm}\vspace{6mm}\\
+    \begin{minipage}[c]{0.70\linewidth} %[hauteur][position]{largeur}
+	{\Huge
+		Mesure d'une température avec précision
+		et transmission par liaison sans fil
+	}
+	\vspace{6mm}
+   \end{minipage}
+\rule{\linewidth}{0.8mm}\vspace{3mm}\\
+%}
+%
+\vspace{5cm}
+%
+   \begin{minipage}[c]{.46\linewidth}
+	{\normalsize 
+		\begin{flushleft}
+	      	Maîtres de stage\\
+		\vspace{2mm}
+		\textsc{Javier Serrano} (Chef de section)\\
+		\textsc{Philippe Nouchi}
+		\end{flushleft}
+	}
+   \end{minipage}\hfill
+%
+   \begin{minipage}[c]{.46\linewidth}
+	{\normalsize 
+		\begin{flushright}
+		Enseignants\\
+		\vspace{2mm}
+		\textsc{Jean-Louis Jorda}\\
+		\textsc{Marcel Peyret}
+		\end{flushright}
+	}
+   \end{minipage}
+\date{} % Je ne veux pas afficher la date
+}  %fin du titre
+
+%\begin{flushright}
+%\LARGE {\textbf{Version du \date}}
+\author{}
+%\end{flushright}
+
+%
+%
+%
+%
+%
+%
+%
+%
+\makeatletter
+\renewcommand{\@makefntext}[1]%
+{\noindent\llap{\@makefnmark\,}#1}
+\renewcommand{\footnoterule}{\vspace*{-3pt}%
+\noindent
+\hspace*{-1em}
+\rule{.4\columnwidth}{0.4pt}\vspace*{2.6pt}}
+\makeatother 
+
+
+
+%
+%%%%%%%%%%%%%%%% Fin des includes... %%%%%%%%%%%%%
+
+\selectlanguage{french}
+\makeindex % Au travail !
+\begin{document}
+\setlength{\headheight}{33pt} 	% Haut de page
+\setlength{\headsep}{20pt} 	% Entre le haut de page et le texte
+\setlength{\textheight}{950pt} 	% Hauteur de la zone de texte 
+
+%%
+\maketitle
+\pagestyle{plain}
+\renewcommand{\headrulewidth}{0pt}
+
+\setcounter{page}{1} %On definit un compteur a 1
+\pagenumbering{roman} %permet une numérotation en chiffre romain
+\thispagestyle{empty} \mbox{ }
+\cleardoublepage
+
+
+\setlength{\headheight}{33pt} 	% Haut de page
+\setlength{\headsep}{40pt} 	% Entre le haut de page et le texte
+\setlength{\textheight}{650pt} 	% Hauteur de la zone de texte 
+
+
+%\thispagestyle{headings}
+\input{./source/Merci} %% Remerciement + note
+%%
+\renewcommand{\contentsname}{\vspace{-30pt} 
+Sommaire} %Pour parler en francais et tout entrer sur 1 seule page
+\tableofcontents
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoffigures   
+%\listoftables  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\setcounter{page}{1} % On réinitialise le coompteur des pages
+\pagenumbering{arabic} % On repasse en numérotation en chiffre Arabe
+%%%%% On redefinit le style fancy{plain} pour les pages spéciales (de nouveaux chapitres) : 
+\fancypagestyle{plain}{
+\fancyhead[LO]{}
+\fancyhead[R]{}
+}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{3pt}
+\input{./source/intro} %% INTRODUCTION
+\input{./source/GNU} %% Outils de developpement
+\input{./source/Mesure} %%  ----- TRAVAUX RÉALISÉS
+\input{./source/Transmission} %% -----
+\input{./source/USB} %% -----
+\input{./source/perso} %% IMPRESSIONS PERSONNELLES 
+%\input{./source/Conclusion} %% CONCLUSION
+
+\pagestyle{plain}
+%\bibliographystyle{unsrt}
+%\bibliography{rapport}
+\newpage
+\input{./source/glossaire}
+
+\renewcommand{\headrulewidth}{0pt}
+\cleardoublepage
+\thispagestyle{empty}
+
+%% Annexes
+
+\appendix
+
+%\setlength{\oddsidemargin}{10pt} 	% Marge gauche sur pages impaires
+%\setlength{\marginparwidth}{10pt} 	% Largeur de note dans la marge
+
+\addtocontents{toc}{\newpage \vskip 10 mm \Large \centerline {\textsc{Annexes}} \normalsize \vskip 5mm}
+\part*{\Huge{\textsc{Annexes}}}
+\setcounter{page}{1} % Réinitialisation du compteur
+\pagenumbering{arabic}
+%
+%
+%\pagestyle{headings}
+\include{./source/Annexe1}
+\include{./source/Annexe2}
+\include{./source/Annexe3}
+%\includepdf[pages=-]{./source/AB_CO}
+
+\addtocontents{toc}{\vskip 30 mm \Large \centerline {\textsc{Article Connexe}}  \vskip 10 mm  
+\normalsize Utilisation de gEDA pour la Conception électronique Assistée par Ordinateur. Utilisation de Piklab pour programmer les PIC sous Linux avec l'ICD2. Utilisation de la carte Pt100 et Xbee. Page \pageref{connexe} des annexes. \newline \vskip 5mm}
+
+\part*{\Huge{\textsc{Article Connexe}}}\label{connexe}
+\includepdf[pages=-]{Cern.pdf} % J'inclus un deuxieme rapport, au format pdf
+%linktodoc ouvre le pdf inclu !!!! 
+%% RESUME
+\setlength{\headheight}{10pt} 	% Haut de page
+\setlength{\headsep}{10pt} 	% Entre le haut de page et le texte
+\setlength{\footskip}{0pt} 	% Bas de page + séparation
+\setlength{\textheight}{999pt} 	% Hauteur de la zone de texte 
+\include{./source/Resume}
+
+\end{document}

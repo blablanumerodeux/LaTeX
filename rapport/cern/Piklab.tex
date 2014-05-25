@@ -1,0 +1,31 @@
+\section{Programmation des PIC sous linux}
+MPLAB, l'environnement distribué par Microchip, est disponible sous Windows. Pour linux, la possibilité est d'utiliser Wine, mais d'aucune utilité apparente. Il est préférable d'utiliser les logiciels libres quand ceux-ci sont performants.
+
+C'est le cas de Piklab, auquel on intègre le compilateur, le créateur de lien, le simulateur, le debugger, etc.
+
+\subsection{installation}
+\' Egalement disponible dans la plupart des dêpots, la dernière version est à télécharger sur \url{http://piklab.sourceforge.net/download.php}.
+
+Pour la programmation des PIC, le langage utilisé pour ce projet est le C. Small Device C compiler est un outil libre et performant. \' Egalement disponible sous Windows, il permet de partager plus facilement les sources et donc de trouver des exemples utilisables.
+
+La dernière version de SDCC est disponible là~: \url{http://sdcc.sourceforge.net/index.php#Download}.\newline
+
+Le programmateur utilisé est le In Circuit Debugger 2 de chez Microchip. Il permet en plus de la programmation par port série ou USB d'utiliser la fonction debugger.
+
+Pour l'utiliser il faut installer un package supplémentaire (icd2prog). Une version est disponible ici~: \url{http://kevin.raymond.free.fr/Stage/icd2prog-0.3.0.tar.gz}. Suivant les dépendances, il peut ne pas être reconnu. Une simple installation de MPLAB sous Wine règlera le problème.
+
+%%
+\subsection{utilisation}
+Sous Piklab, lors de la création d'un nouveau projet, il faut spécifier le compilateur et le programmateur. Par défaut beaucoup sont proposés. Nous utiliserons SDCC avec l'ICD2.
+
+Pour l'ICD2 il ne faut pas activer l'option "Low voltage programmation". \newline
+
+Si tout ce passe bien, une fois connecté un rapport avec les différentes tensions est affiché. Exemple~:
+
+
+  \noindent Vpp du programmateur = 12.4613 V\newline
+  \noindent Vdd de la cible = 5.00224 V\newline
+  \noindent Vpp de la cible = 12.4613 V\newline
+
+Etant très intuitif, cet environnement est très rapide à prendre en main.
+

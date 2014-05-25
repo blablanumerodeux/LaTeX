@@ -1,0 +1,44 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{glssymbols}\relax \glsresetentrylist %
+\glossaryentryfield{backlog}{\glsnamefont{\foreignlanguage {english}{backlog}}}{Nombre d'incidents non résolus à la fin de la journée}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{9}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{15}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{18\delimN 19}}}%
+\glossaryentryfield{launcher}{\glsnamefont{\foreignlanguage {english}{launcher}}}{Lanceur}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{20}}}\glsgroupskip
+\glsgroupheading{B}\relax \glsresetentrylist %
+\glossaryentryfield{back office}{\glsnamefont{back office}}{Coulisses}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{8}}}\glsgroupskip
+\glsgroupheading{C}\relax \glsresetentrylist %
+\glossaryentryfield{cloud}{\glsnamefont{cloud computing}}{Concept qui consiste à déporter sur des serveurs distants des stockages et des traitements informatiques traditionnellement localisés sur des serveurs locaux. cf. \url {http://fr.wikipedia.org/wiki/Cloud_computing}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{5}}}\glsgroupskip
+\glsgroupheading{D}\relax \glsresetentrylist %
+\glossaryentryfield{dispatcher}{\glsnamefont{dispatcher}}{Personne chargée de recevoir et retransmettre les \gls {ot}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{11\delimR 13}}}%
+\glossaryentryfield{domdef}{\glsnamefont{Document Object Model}}{Standard indépendant de tout langage de programmation permettant la modification de documents XML et HTML. cf. \url {http://fr.wikipedia.org/wiki/Document_Object_Model}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}}}\glsgroupskip
+\glsgroupheading{H}\relax \glsresetentrylist %
+\glossaryentryfield{hardware}{\glsnamefont{hardware}}{Matériel}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{11}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossaryentryfield{infogerance}{\glsnamefont{infogérance}}{C’est l’externalisation de tout ou partie de la gestion et de l’exploitation du SI à un prestataire informatique tiers (SSII). cf. \url {http://fr.wikipedia.org/wiki/Infogérance}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{5\delimN 6}}}%
+\glossaryentryfield{apidef}{\glsnamefont{interface de programmation}}{Une interface de programmation est une façade clairement délimitée par laquelle un logiciel offre des services à d'autres logiciels. cf. \url {http://fr.wikipedia.org/wiki/Interface_de_programmation}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}}}\glsgroupskip
+\glsgroupheading{M}\relax \glsresetentrylist %
+\glossaryentryfield{macros}{\glsnamefont{macros-commandes}}{Enregistrement des actions effectuées par un utilisateur, au clavier et à la souris, afin de pouvoir les rejouer dans le même ordre automatiquement par la suite. cf. \url {http://fr.wikipedia.org/wiki/Macro-commande}}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{8}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{software}{\glsnamefont{software}}{Logiciel}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{16}}}\glsgroupskip
+\glsgroupheading{T}\relax \glsresetentrylist %
+\glossaryentryfield{team}{\glsnamefont{team leader}}{Chef d'équipe}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{9}}}%
+\end{theglossary}\glossarypostamble

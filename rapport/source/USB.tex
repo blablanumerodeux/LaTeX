@@ -1,0 +1,50 @@
+\chapter{L'USB}
+%%%
+De nos jours, l'Universal Serial Bus est un bus de donnée largement utilisé pour sa simplicité d'utilisation et l'alimentation disponible avec un ordinateur.
+
+Il existe plusieurs possibilités en utilisant des PIC~:
+\begin{itemize}
+	\item Le protocole HID, vitesse limitée à 64ko/s, aucun pilote nécessaire,
+	\item \' Emulation port COM (CDC) : voir AN956 , sans pilote,
+	\item USB low-speed, vitesse de 1.5Mb/s, nécessite un pilote,
+	\item USB full-speed, vitesse de 12Mb/s, oscillateur 48Mhz minimum, nécessite un pilote
+\end{itemize}
+
+L'émulation du port COM (port série, protocole RS232) est assez facile à mettre en oeuvre: elle permet la compatibilité avec d'anciennes applications PC. Surtout utilisée dans le domaine industriel pour ne pas devoir développer d'autre applications devant gérer l'USB, quand les périphériques migrent du RS232 à l'USB.
+
+	La solution USB pour de plus grande vitesse de transfert nécessite la programmation d'un pilote~: un programme lourd et complexe à mettre en \oe uvre.
+
+	La solution d'une interface HID a donc été retenue pour sa relative simplicité, la vitesse de transmission étant amplement suffisante pour l'application désirée.
+
+
+\section{Human Interface Device}
+Le protocole HID (Human Interface Device) est de plus en plus utilisé puisque c'est la manière la plus simple d'utiliser le port USB. Sa seule limitation est la vitesse de transmission. Cette solution est utilisée pour les claviers, les souris, les manettes de jeux vidéos, etc. \newline
+
+L'USB peut nous fournir une alimentation de 5~V limitée à 500~mA. Amplement suffisant pour notre application.\newline
+
+
+Contrairement à la liaison RS232 et des interfaces sérielles similaires où le format des données envoyées n'est pas défini par défaut, l'USB est composé de plusieurs couches de protocoles imposées.  Il s'agit d'un réseau en jeton.
+
+Chaque transaction USB consiste d'un paquet Jeton (Token) pour savoir si il faut attendre une autre réponse ou poursuivre, d'un paquet DATA optionnel (contenant la "charge utile " (payload)) et d'un paquet d'Etat (utilisé pour valider les transactions et pour fournir des moyens de corrections d'erreurs).\newline
+
+	Sur le bus USB, c'est l'hôte qui gère la transmission. Il s'agit de l'ordinateur. Il envoie le premier paquet avec le jeton au nouveau périphérique détecté pour qu'il puisse s'identifier et ainsi créer la connexion. Pour les communications entre péripherique (sans passer par un ordinateur) il n'y a pas d'hôte. Il faut donc travailler en O-T-G (On-The-Go). \newline
+
+
+	L'USB est un bus série. Il utilise quatre fils isolés dont deux sont l'alimentation (+5V et GND). Les deux restants forment une paire torsadée qui véhicule les signaux en mode différentiel. Il utilise un schéma d'encodage NRZI (Non Retour à Zéro inversé) pour envoyer des données.\newline
+
+%%%
+\section{Exploitation}
+Avant de dialoguer avec l'hôte, le périphérique doit s'identifier. Tout périphérique USB a un code VID et PID unique pouvant l'identifier. Le VID est le Vendor IDentification (pour microchip VID = 0x04D8) et PID est le Product IDentification. A la connexion, le périphérique s'identifie et spécifie le protocole (volumes des paquets transmis, le débit, le courant maximum à débiter, etc.).
+
+	La vitesse de la communication ne dépend que de deux paramètres, la taille du paquet envoyé (maximum 64 octets) et la période séparant chaque demande du pic (« pooling » minimum : une milliseconde). On aura donc 64 ko/s dans les meilleures conditions.\newline
+
+La connexion d'un nouveau périphérique est détectée par un changement de niveau sur les lignes de données. En effet, des résistances de pull-up y sont positionnées pour spécifier la vitesse de transmission (interne au PIC).
+
+Pour le processus d'énumération (le périphérique s'identifie et l'hôte lui assigne une adresse), voir en fonction du système d'exploitation.\newline
+
+Pour linux, voir \url{http://www.linux-usb.org/} et \url{http://www.usbman.com/linuxusb.htm}.
+
+
+Désormais le périphérique est en fonctionnement, l'hôte demande un pilote pour le nouveau périphérique détecté. Pour un périphérique HID, le pilote est reconnut automatiquement.
+
+

@@ -1,0 +1,46 @@
+\section{Acquisition d'une température}
+
+\subsection{Principe de fonctionnement des cartes}
+Le système est basé sur deux cartes différentes. L'une mesurant la température à une fréquence variable et l'autre les recevants pour les transmettre à un ordinateur.
+
+La liaison entre ces deux cartes est sans-fil (voir \ref{zigbee}) et la gestion de l'alimentation est importante pour se module autonome.
+
+\subsubsection{Mesure d'une température}
+
+La mesure d'une température est effectué pour plus de précision avec une résistance métallique de platine, une Pt100.
+
+Le schéma est le suivant~:
+ \begin{figure}[h]
+	\includegraphics[width=15cm]{./img/circuit}
+	\caption{Circuit conditionneur}
+\end{figure}
+
+La source de courant est basée sur l'amplificateur OPA335, avec en entrée une référence de tension de 2,5~V (MCP1525). Tous les éléments apparaissant sur ce schéma doivent être au maximum indépendant de la température. Les résistances sont choisies avec une précision d'au moins 0,1~\%.
+
+Les résistances du pont de Wheatstone sont de 100,00~Ohm pour avoir un équilibre à 0,00~°C. Il est composé de deux éléments variants (des Pt100) pour avoir une erreur de linéarité nulle.\newline
+
+La carte émettrices est composée de quatres régulateurs. Le premier est un régulateur 5~V pour alimenter le PIC. Il est suivit d'un régulateur 3,3~V pour alimenter le module Xbee. Ce dernier régulateur dispose d'une broche de validation contrôlée par le PIC. De cette manière, le PIC dévide ou non d'aliment le module Xbee.
+
+En parallèle est positionné un régulateur 5~V dédié à l'alimentation des amplificateurs unipolaires pour la mesure de température. Lui aussi dispose d'une entrée de validation connécté au PIC. Il est suivit de la référence de tension 2,5~V. En arrêtant ce régulateur 5~V, le PIC décide d'éteindre toute la chaîne de mesure. \newline
+
+De part cette alimentation, en quelques instants seulement il ne reste plus que le PIC d'alimenté. Celui-ci disposant d'une fonction \og veille \fg\  , lors d'une attente de mesure, la consommation est minime. De l'orde de quelque dizaines de micro-volts.\newline
+
+Sur les différentes cartes, beaucoup d'entrées/sorties du module Xbee ont été connectés. Ceci simplement pour une utilisation future. 
+
+D'indispensable il n'y a pour l'instant que les broches suivantes~: DIN et DOUT pour la liaison série et les commandes AT, contrôlant le module~; RTS et CTS pour contrôler les tampons d'émission et de réception~; SLEEP permettant de mettre en veille le module, associée à SLEEP\_RQ pour vérifier l'état du module.
+
+Le schéma ainsi que les typons sont disponibles en annexe.
+
+
+%%
+\subsection{Le module Xbee} \label{zigbee}
+Le 
+
+%%%%
+\subsection{Le programme}
+la source du prog.
+Les améliorations envisageables.
+%%%
+
+
+

@@ -1,0 +1,119 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[english, francais]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage{french}
+%\usepackage[utf8]{inputenc}
+%\usepackage{lmodern}
+%\usepackage[francais, english]{babel}
+\usepackage{fancyvrb}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage{listings}
+\lstset{breaklines=true}
+% \usepackage{glossaries}
+
+\usepackage[
+%nonumberlist, %do not show page numbers
+acronym,      %generate acronym listing
+toc,          %show listings as entries in table of contents
+section]      %use section level for toc entries
+{glossaries}
+
+%\glossarystyle{sublistdotted}
+\usepackage[pdftex,
+        bookmarks = true,           % Signets
+        bookmarksnumbered = true,   % Signets numerotes
+	pdfstartview = FitV,        % La page prend toute la hauteur
+	colorlinks=true,
+	citecolor=black,urlcolor=blue,linkcolor=red,
+	pdfauthor={Damien Lambla},
+	pdftitle={Maintenance, statistiques et développement à Disneyland Paris},
+ 	pdfsubject={Rapport de mission},
+	plainpages=false,
+	pdfpagelabels,
+	bookmarks,
+	breaklinks=true,
+   	hyperindex,
+	linktocpage=true]	% pour colorier seulement le numéros dans la TOC	
+{hyperref}
+% \usepackage{frbib}
+
+\makeglossaries
+\pagestyle{empty}
+\title{Rapport de mission}
+\author{Damien \textsc{Lambla}}
+
+
+\newcommand{\reporttitle}{Maintenance, statistiques et développement à Disneyland Paris}     % Titre
+\newcommand{\reportauthor}{Damien \textsc{Lambla}} % Auteur
+\newcommand{\reportsubject}{Rapport de mission} % Sujet
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\setlength{\parskip}{1ex} % Espace entre les paragraphes
+\onehalfspacing
+\begin{document}
+  \input{./title.tex}
+  \newpage
+   \null
+  \newpage
+  \cleardoublepage % Dans le cas du recto verso, ajoute une page blanche si besoin
+  \tableofcontents % Table des matières
+  %manque table des figures
+  
+  \sloppy          % Justification moins stricte : des mots ne dépasseront pas des paragraphes
+  \cleardoublepage
+  
+  \pagestyle{plain}
+  
+\setcounter{page}{1} % Réinitialisation du compteur
+\pagenumbering{arabic}
+  
+  \input{./remerciements.tex}
+  \cleardoublepage
+  \input{./resume.tex}
+  \cleardoublepage
+  \input{./intro.tex}
+  \cleardoublepage
+  \input{./presentationEntreprise.tex}
+  \cleardoublepage
+  \input{./descriptionMission.tex}
+  \cleardoublepage
+  \input{./maintenance.tex}
+  \cleardoublepage
+  \input{./macro.tex}
+  \cleardoublepage
+  \input{./emploiDuTemps.tex}
+  \cleardoublepage
+  \include{./conclusion}
+  \cleardoublepage
+  
+%   \include{./references}
+
+  \nocite{*}
+% \begin{multicols}{2}
+%   \printglossaries
+  \printglossary[type=\acronymtype, title=Acronymes, toctitle=Acronymes]
+  \printglossary[toctitle=Glossaire]
+
+% \end{multicols}
+
+%   \begin{resume}
+%   xdvxwcvxcvx
+%   \end{resume}
+%   \begin{abstract} 
+%   the same in english 
+%   \end{abstract}
+  \bibliographystyle{plain-fr}
+  \bibliography{biblio}
+  
+  \appendix
+  
+\addtocontents{toc}{\newpage \vskip 10 mm \Large \centerline {\textsc{Annexes}} \normalsize \vskip 5mm}
+\part*{\Huge{Annexes}}
+% \setcounter{page}{1} % Réinitialisation du compteur
+% \pagenumbering{arabic}
+
+  \include{./annexe1}
+
+\end{document}

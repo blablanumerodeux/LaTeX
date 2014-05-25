@@ -1,0 +1,67 @@
+\chapter{Transmission sans fil}
+%%%
+\section{Choix du protocole}
+Pour les satellites (carte de mesure de température) il est important de ne pas devoir les connecter par fil. En effet, cela permet de les positionner momentanément à divers endroits.\newline
+
+Pour ce projet la meilleure solution reste les ondes électro-magnétiques. De cette manière il est possible de s'affranchir de certains obstacles.
+
+ Il existe principalement trois technologies différentes, toutes exploitant la bande des micro-ondes, soit 2,4~Ghz~:
+
+\begin{enumerate}
+\item \textbf{Le WIFI}, la référence lorsqu'il faut un débit important. On le rencontre surtout pour les réseaux ethernet,
+\item \textbf{Le Bluetooth}, utilisé principalement pour connecter entre eux plusieurs périphériques (imprimante, mobile~\dots),
+\item \textbf{Le ZigBee}, faible consommation et portée moyenne, ce protocole devrait être la référence en domotique.
+\end{enumerate}
+
+\vspace{2mm}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Protocole} & \textbf{ZigBee} & \textbf{Bluetooth} & \textbf{WIFI}\\ \hline
+Norme IEEE & 802.15.4 & 802.15.1 & 802.11a/b/g\\ \hline
+Besoins mémoire & 4-32~Kb & 250~Kb + & 1~Mb +\\ \hline
+Durée de vie & Années & Jours & Heures\\ \hline
+Nombre de n\oe uds & \nombre{65000}+ & 7 & 32\\ \hline
+Vitesse de transfert & 250~Kb/s & 1~Mb/s & 11-54-108~Mb/s\\ \hline
+Portée & 100~m & 10-100~m & 300~m\\ \hline
+\end{tabular}\newline
+\end{center}
+\vspace{2mm}
+
+Le protocole correspondant le mieux est donc le ZigBee~: bonne portée, faible consommation et beaucoup de n\oe uds possibles (nombres de connexions par réseau).\newline
+
+Le Xbee de MAXSTREAM est très simple à mettre en oeuvre tout en très performant.
+%\subsection{WIFI}
+%\subsection{Bluetooth}
+%\subsection{Zigbee}
+%%%
+
+\section{Le module Xbee}
+Disponible en deux versions (Xbee Pro ou Xbee) il est possible de choisir l'antenne. Filaire, externe ou CMS. Pour l'utilisation du Xbee Pro en Europe, on se doit de limiter sa puissance d'émission à 10~dBm ce qui est rendu possible par programmation.
+
+J'ai choisi le module Xbee puisque je ne voyais pas l'utilité du module Xbee Pro. Néanmoins, ces deux modules étant interchangeables, cela ne pose pas de problème pour une utilisation future.\newline
+
+La consomation du module Xbee inférieure à 10~$\mu$A en repos et de 50~mA en émission/réception. Idéal pour une alimentation par pile. Ses 16 canaux permettent d'éviter les interférences.
+
+Il dispose de plusieurs entrées-sorties analogiques. Le principal dialogue avec le microcontrôleur est effectué par liaison série. La configuration du module se fait par commande \og AT \fg . Il s'agit d'un dialogue en chaîne de caractères. 
+
+Il peut être configuré pour recopier l'état de ses entrées sur un autre module si l'on connaît son adresse, ou même réémettre ce qu'il reçoit pour les modules les plus éloignés. Cette possibilité est très avantageuse pour éloigner les différents satellites.\newline
+
+         %\piccaption{Module Xbee}
+	\parpic[l]{\includegraphics[width=4cm]{./img/xbee}}
+
+
+Très facile à exploiter, il est également simple à connecter. \textbf{Attention cependant, son alimentation est de 3,3~V maximum}. \newline 
+
+Sur vingt broches, seulement quatre sont nécessaires. Il s'agit de DIN et DOUT pour la liaison série, de Vcc et Gnd pour l'alimentation. Mais avec RTS et CTS il est possible de contrôler l'état des tampons d'émission et réception.
+
+DTR, RTS et CTS permettent la reprogrammation du firmware. Pour cela il faut le kit de MAXSTREAM.
+
+Pour mettre en veille le module, il faut contrôler la broche SLEEP. SLEEP\_RQ permet de vérifier l'état du module.\newline
+
+Ce module comprend en tout neuf entrées analogiques/numériques, avec la possibilité de positionner des résitances de pull-up en interne.\newline
+
+Toutes les documentations sont disponibles ici~:~\url{http://www.maxstream.net/products/xbee/xbee-oem-rf-module-zigbee.php}.
+%%%
+
+

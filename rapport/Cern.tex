@@ -1,0 +1,157 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[latin1]{inputenc}     % pour Unix Latin1 aussi..
+% \usepackage[applemac]{inputenc} % pour utilisateurs mac
+% \usepackage[ansinew]{inputenc}  % pour Windows ANSI (yen a encore qui utilisent ca? :s)
+\usepackage{verbatim} 
+\usepackage{aeguill}
+\usepackage{amsfonts}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{lscape} % pour avoir une page en paysage
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{textcomp}  % pour les caractères spéciaux (copyleft etc)
+\usepackage{marvosym} % caractere electrostatic, laserbeam...
+\usepackage{supertabular}% tableaux sur plusieurs pages
+\usepackage{ifsym} % caractères scpéciaux
+\usepackage{longtable}
+\usepackage{upgreek}
+\usepackage{picins}
+\usepackage{lastpage}
+\usepackage[english,french]{babel}
+%%%%%%%%%%%%% parallel, multicolpar et parcolumns.%%%%%%%%%%%%%%%%%%%%%% pour des documents multicolones bilingue.
+\usepackage[pdftex]{graphicx, color}
+\usepackage{pdfpages}
+\graphicspath{{img/}} % La ou j'ai mes images
+\DeclareGraphicsExtensions{.jpg,.png}
+\pdfoutput=1
+\usepackage[pdftex,
+	a4paper,
+        bookmarks = true,           % Signets
+        bookmarksnumbered = true,   % Signets numerotes
+        pdfpagemode = None,         % Signets/vignettes fermes a l'ouverture
+        %pdfstartview = FitH,        % La page prend toute la largeur
+	pdfstartview = FitV,        % La page prend toute la hauteur
+	colorlinks=true,
+	citecolor=black,urlcolor=blue,linkcolor=red,
+	pdfauthor={Kévin Raymond},
+	pdftitle={Stage au CERN},
+ 	pdfsubject={Rapport de stage},
+	pdfkeywords={Xbee, pt100, PIC, GNU,Piklab, SDCC, Linux, CAO, gEDA},
+	plainpages=false,
+	pdfpagelabels,
+	bookmarks,
+	breaklinks=true,
+   	hyperindex,
+	linktocpage=true	% pour colorier seulement le numéros dans la TOC	
+]{hyperref}
+%
+\pdfcompresslevel=9
+%
+%
+%%% style sans serif pour les url
+\urlstyle{sf}
+
+%
+
+
+
+%%%% debut macro %%%%
+\newenvironment{changemargin}[2]{\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0pt}%
+\setlength{\rightmargin}{0pt}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{0pt plus 1pt}%
+\addtolength{\leftmargin}{#1}%
+\addtolength{\rightmargin}{#2}%
+}\item }{\end{list}}
+%%%% fin macro %%%%
+
+%
+%
+%%%%%%%%% Mise en Forme page de garde %%%%%%%%%%%%%%%%%%%%
+%######################## Définition du titre ######################
+\title{
+\thispagestyle{empty}
+\vspace{-40mm}
+   \begin{minipage}[c][150pt][c]{.40\linewidth} %[hauteur][position]{largeur}
+		\begin{flushleft}
+		\vspace{2mm}
+		\includegraphics[width=3cm]{./img/CERN_logo}
+		\vspace{3mm}
+		\end{flushleft}
+   \end{minipage}\hfill
+   \begin{minipage}[c][150pt][c]{.40\linewidth} %[hauteur][position]{largeur}
+	{\normalsize 
+		\begin{flushright}
+		\vspace{3mm}
+		\textsc{Kévin Raymond}\\
+		Année 2007\\
+		\end{flushright}
+	}
+   \end{minipage}
+\vfill
+\rule{\linewidth}{0.8mm}\vspace{6mm}\\
+    \begin{minipage}[c]{0.70\linewidth} %[hauteur][position]{largeur}
+	{\large	
+		Utilisation de gEDA, suite libre de CAO\\
+		Programmation des PIC sous Linux\\
+		Utilisation de la carte Mesure de température\\
+	}
+	\end{minipage}\vspace{6mm}
+\rule{\linewidth}{0.8mm}\vspace{6mm}\\
+\vspace{3mm}
+\begin{minipage}[c][150pt][c]{.40\linewidth} %[hauteur][position]{largeur}
+	{\normalsize 
+		\begin{flushleft}
+		\textbf{Résumé~:}\\
+		Article déstiné à aider à prendre en main la suite de CAO gEDA, Piklab pour programmer les PIC sous linux et quelques notes sur l'utilisation de la carte pour mesurer les températures.
+		\end{flushleft}
+	}
+   \end{minipage}
+\date{} % Je ne veux pas afficher la date
+}  %fin du titre
+
+
+
+%
+%%%%%%%%%%%%%%%% Fin des includes... %%%%%%%%%%%%%
+
+\begin{document}
+
+%%
+\maketitle
+
+\newpage
+
+\setcounter{page}{1} %On definit un compteur a 1
+\pagenumbering{roman} %permet une numérotation en chiffre romain
+
+%%
+\tableofcontents
+\newpage
+
+
+
+\setcounter{page}{1} % On réinitialise le coompteur des pages
+\pagenumbering{arabic} % On repasse en numérotation en chiffre Arabe
+\pagestyle{fancy}
+\input{./cern/intro} \newpage
+\input{./cern/gEDA} \newpage
+\input{./cern/Piklab} \newpage
+\input{./cern/carte} \newpage
+\input{./cern/conclusion} 
+
+\newpage
+%% Annexes
+
+\appendix
+\include{./cern/Annexe1}
+\include{./cern/Annexe2}
+
+\end{document}
+
+
+%%

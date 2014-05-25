@@ -1,0 +1,65 @@
+\select@language {french}
+\select@language {french}
+\contentsline {chapter}{Introduction}{1}{chapter*.5}
+\contentsline {chapter}{\numberline {1}Le CERN}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}Pr\'esentation}{2}{section.1.1}
+\contentsline {section}{\numberline {1.2}Situation actuelle}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}Groupe AB-CO}{4}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Salle de Contr\^ole}{5}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Section AB-CO-HT}{5}{subsection.1.3.2}
+\contentsline {chapter}{\numberline {2}Les outils de d\'eveloppements}{6}{chapter.2}
+\contentsline {section}{\numberline {2.1}Sch\'ema et Circuit imprim\'e}{7}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}KiCaD}{7}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}gEDA}{8}{subsection.2.1.2}
+\contentsline {subsubsection}{gschem}{10}{section*.8}
+\contentsline {subsubsection}{Pcb}{10}{section*.9}
+\contentsline {subsubsection}{Conclusion sur gEDA}{10}{section*.10}
+\contentsline {section}{\numberline {2.2}Les Microcontr\^oleurs}{11}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Les PIC sous Linux}{11}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Piklab}{11}{subsection.2.2.2}
+\contentsline {subsubsection}{ICD2 Microchip}{12}{section*.11}
+\contentsline {subsubsection}{SDCC}{12}{section*.12}
+\contentsline {chapter}{\numberline {3}Mesure d'une temp\'erature}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Choix d'un capteur}{13}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Capteurs actifs}{13}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Capteurs passifs}{14}{subsection.3.1.2}
+\contentsline {subsubsection}{thermistances}{14}{section*.13}
+\contentsline {subsubsection}{RTDs et pRTD}{15}{section*.14}
+\contentsline {section}{\numberline {3.2}Pt100 : Circuit conditionneur}{16}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Les circuits int\'egr\'es}{16}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Un circuit adapt\'e}{17}{subsection.3.2.2}
+\contentsline {subsubsection}{Source de courant stable}{17}{section*.15}
+\contentsline {subsubsection}{Pont de Wheatstone}{19}{section*.16}
+\contentsline {subsubsection}{Amplificateur}{20}{section*.17}
+\contentsline {subsubsection}{Interface CAN : exploitation de la sonde}{20}{section*.18}
+\contentsline {subsubsection}{Plus grande plage de temp\'erature}{21}{section*.19}
+\contentsline {chapter}{\numberline {4}Transmission sans fil}{22}{chapter.4}
+\contentsline {section}{\numberline {4.1}Choix du protocole}{22}{section.4.1}
+\contentsline {section}{\numberline {4.2}Le module Xbee}{22}{section.4.2}
+\contentsline {chapter}{\numberline {5}L'USB}{24}{chapter.5}
+\contentsline {section}{\numberline {5.1}Human Interface Device}{24}{section.5.1}
+\contentsline {section}{\numberline {5.2}Exploitation}{25}{section.5.2}
+\contentsline {chapter}{\numberline {6}Impressions personnelles}{26}{chapter.6}
+\contentsline {chapter}{Conclusion}{27}{chapter*.20}
+\contentsline {chapter}{Glossaire}{28}{chapter*.21}
+\contentsline {chapter}{Bibliographie}{29}{chapter*.23}
+\par \vfil \penalty -\@M \vskip 10 mm \relax \fontsize {17.28}{22}\selectfont \hbox to\hsize {\hss \textsc {Annexes}\hss } \relax \fontsize {12}{14.5}\selectfont \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \vskip 5mm
+\contentsline {chapter}{\numberline {A}Tables Pt100}{1}{appendix.A}
+\contentsline {subsubsection}{Table de r\'esistivit\'e de la Pt100 (valeur \`a multiplier par 10 pour avoir la table de la Pt1000)}{1}{section*.25}
+\contentsline {chapter}{\numberline {B}Calcul d'incertitude}{4}{appendix.B}
+\contentsline {section}{\numberline {B.1}Donn\'ees}{4}{section.B.1}
+\contentsline {section}{\numberline {B.2}Les \'etapes}{4}{section.B.2}
+\contentsline {subsubsection}{Incertitude sur $I'$}{5}{section*.30}
+\contentsline {subsubsection}{Incertitude sur $V_A$}{5}{section*.31}
+\contentsline {subsubsection}{Incertitude sur $V_B$}{6}{section*.32}
+\contentsline {subsubsection}{Incertitude sur $V_0$}{6}{section*.33}
+\contentsline {subsubsection}{Gain}{7}{section*.35}
+\contentsline {subsubsection}{Calcul de l'incertitude sur $V_s$}{7}{section*.36}
+\contentsline {chapter}{\numberline {C}Cartes}{10}{appendix.C}
+\contentsline {section}{\numberline {C.1}Emetteur}{10}{section.C.1}
+\contentsline {section}{\numberline {C.2}R\'ecepteur}{10}{section.C.2}
+\vskip 30 mm \relax \fontsize {17.28}{22}\selectfont \hbox to\hsize {\hss \textsc {Article Connexe}\hss } \vskip 10 mm \relax \fontsize {12}{14.5}\selectfont \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ Utilisation de gEDA pour la Conception \'electronique Assist\'ee par Ordinateur. Utilisation de Piklab pour programmer les PIC sous Linux avec l'ICD2. Utilisation de la carte Pt100 et Xbee. Page \pageref {connexe} des annexes. \newline \vskip 5mm
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
